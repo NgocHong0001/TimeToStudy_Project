@@ -1,23 +1,14 @@
-import mongoose from 'mongoose';
-import router from express.Router();
-import User from ('../models/user')
+import { registerUser } from '../controller/userController.js';
+import express from 'express';
 
-router.post('/register', async (req, res) => {
-    const {username, email, password} = req.body;
+const router = express();
 
-    try {
-    const userExist = await User.findOne({ email }); 
-    if (userExist) return res.status(400).json({ message: "User alreadys exists"});
+// Register new students
+router.post('/register', registerUser);
 
-    const newUser = new User({ username, email, password });
-    await newUser.save();
-    console.log(newUser); //Debug purpose.
+//  Login
+router.post('/login', loginUser);
 
-    return res.status(201).json({ message: "User succesfully created!"})
+export default router;
 
-} catch (err) {
-    return res.status(500).json({ err: err.message });
-    
-}
-})
 

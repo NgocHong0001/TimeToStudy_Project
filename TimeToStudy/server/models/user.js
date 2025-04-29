@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true, // Removes whitespace.
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    lowercase: true, // Gör epostadresser små bokstäver
+    lowercase: true, 
   },
   password: {
     type: String,
