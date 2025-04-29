@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
-import bcrypt from 'brcypt';
+import bcrypt from 'bcrypt';
+
 
 // Create schema for a new user.
 const UserSchema = new mongoose.Schema({
-  userID: {
+  /*userID: {
     type: String,
     unique: true
-  },
+  },*/
   firstname: {
     type: String,
     required: true,
@@ -55,4 +56,4 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = User;
+export default User;

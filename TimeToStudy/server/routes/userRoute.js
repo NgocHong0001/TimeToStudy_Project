@@ -1,13 +1,10 @@
-import { registerUser } from '../controller/userController.js';
 import express from 'express';
+import { registerUser } from '../controllers/userController.js'; 
 
 const router = express();
 
 // Register new students
 router.post('/register', registerUser);
-
-//  Login
-router.post('/login', loginUser);
 
 export default router;
 
