@@ -3,16 +3,15 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #1e1e2f; /* (or whatever background you want) */
+  background-color: #1e1e2f; 
   font-family: Arial, sans-serif;
 }
 
 
 
-/* General container */
 .app-container {
-  background-color: #1e1e2f; /* Dark background */
-  color: #e0e0f0; /* Light text */
+  background-color: #1e1e2f; 
+  color: #e0e0f0; 
   min-height: 100vh;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,7 +22,7 @@ body {
   text-align: center;
   font-size: 2.2rem;
   margin-bottom: 10px;
-  color: #cfc4ff; /* Soft purple */
+  color: #cfc4ff; 
 }
 
 /* Month and Week display */
@@ -36,7 +35,7 @@ body {
 
 /* Buttons */
 .load-button, .week-button {
-  background-color: #6c5ce7; /* Vivid purple */
+  background-color: #6c5ce7; 
   border: none;
   color: white;
   padding: 10px 20px;
@@ -65,7 +64,7 @@ body {
 
 /* Table Headers */
 .schedule-table th {
-  background-color: #2d2d44; /* Darker header */
+  background-color: #2d2d44; 
   color: #d1cfff;
   padding: 10px;
   text-align: center;
@@ -74,7 +73,7 @@ body {
 
 /* Table Cells */
 .schedule-table td {
-  background-color: #262636; /* Slightly lighter background */
+  background-color: #262636;
   padding: 10px;
   border: 1px solid #3d3d5c;
   vertical-align: top;
@@ -135,8 +134,8 @@ body {
 }
 
 .green-event {
-  background-color: #b2f2bb; /* light green */
-  color: #084c1e; /* dark green text */
+  background-color: #b2f2bb; 
+  color: #084c1e; 
   border: 1px solid #5cd65c;
   border-radius: 5px;
   padding: 4px;
