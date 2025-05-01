@@ -54,6 +54,42 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.file-selector {
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-selector label {
+  font-weight: bold;
+  color:white;
+}
+
+.file-selector select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.file-selector select:hover {
+  border-color: #888;
+}
+
+.file-selector select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
