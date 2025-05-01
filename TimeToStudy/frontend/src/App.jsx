@@ -1,21 +1,28 @@
 import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import RegisterForm from './components/Register';
-import './App.css';
+import RegisterForm from './pages/Register';
+import './styles/App.css';
+import Layout from './Layout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Login from './pages/Login';
 
-// Home Page.
-function HomePage() {
-  const navigate = useNavigate();
 
+function RouterWrapper() {
   return (
-    <div>
-      <h1>Welcome to Time To Study!</h1>
-      <button onClick={() => navigate('/')}>Go to App</button>
-      <button onClick={() => navigate('/register')}>Register</button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="register" element={<RegisterForm />} />
+        <Route path="app" element={<App />} />
+        <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
+      </Route>
+    </Routes>
   );
 }
 
+export default RouterWrapper;
 function App() {
   const [events, setEvents] = useState([]);
   const [studyEvents, setStudyEvents] = useState([]); 
@@ -258,17 +265,4 @@ function App() {
     </div>
   );
 }
-
-// ✅ Routingfil – här använder vi App på /, HomePage på /welcome
-function RouterWrapper() {
-  return (
-    <Routes>
-      <Route path="/welcome" element={<HomePage />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/" element={<App />} />
-    </Routes>
-  );
-}
-
-export default RouterWrapper;
 

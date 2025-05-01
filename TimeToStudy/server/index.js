@@ -4,11 +4,13 @@ import dotenv from 'dotenv';
 import userRoute from './routes/userRoute.js';
 import mongoose from 'mongoose';
 import fs from 'fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path, { dirname, join } from 'path';
 import ICAL from 'ical.js';
-dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '.env') });
 
 
 const DB_PORT = process.env.PORT || 5000;
@@ -37,9 +39,6 @@ mongoose.connect(DB_MONGODB)
 app.listen(DB_PORT, () => {
     console.log(`Server running on http://localhost:${DB_PORT}..`);
 });
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 app.get('/api/ics', (req, res) => {
   const fileName = req.query.file; 
@@ -96,6 +95,3 @@ app.get('/api/ics', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});

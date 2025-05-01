@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,14 +11,14 @@ function RegisterForm() {
     e.preventDefault();
 
     const apiUrl = import.meta.env.VITE_API_URL; // Make sure this points to your backend, e.g., http://localhost:5000
-
+    console.log("Testing if API URL works: ", apiUrl);
     try {
       const response = await fetch(`${apiUrl}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ firstname, lastname, username, email, password }),
       });
 
       const data = await response.json();
