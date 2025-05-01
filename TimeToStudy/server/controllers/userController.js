@@ -21,3 +21,12 @@ export const registerUser = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+export const getUserProfile = (req, res) => {
+  // req.user created by the auth middleware
+  res.json({
+    message: `Welcome ${req.user.username}!`,
+    userId: req.user.id
+  });
+};
+

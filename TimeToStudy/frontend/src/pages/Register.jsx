@@ -10,7 +10,7 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL; // Make sure this points to your backend, e.g., http://localhost:5000
+    const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
     console.log("Testing if API URL works: ", apiUrl);
     try {
       const response = await fetch(`${apiUrl}/register`, {
