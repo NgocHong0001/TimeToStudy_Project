@@ -5,6 +5,7 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
+import Register from './pages/register';
 
 import Layout2 from './Layout2';
 import Dashboard from './pages/Dashboard';
@@ -19,6 +20,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Route>
 
       {/* Logged-in layout used for multiple separate paths */}

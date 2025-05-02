@@ -31,7 +31,7 @@ export default function Layout2() {
 
       <footer className="footer">
           <div className="footer-content">
-            <p>© 2023 Time2Study. All rights reserved.</p>
+            <p>© 2025 Time2Study. All rights reserved.</p>
           </div>
       </footer>
     </div>

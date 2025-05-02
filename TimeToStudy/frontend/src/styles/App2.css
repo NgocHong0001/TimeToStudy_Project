@@ -1,3 +1,5 @@
+/*styling of everything related to layout2*/
+
 .layout2 {
   display: grid;
   height: 100vh;
@@ -15,10 +17,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
 }
 
 .nav-icon{
   filter: brightness(0) invert(1);
+  width: 25%;
 }
 
 .sidebar-link {
@@ -28,7 +32,7 @@
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  gap: 1rem;
+  gap: rem;
 }
 
 .sidebar-link:hover {
