@@ -24,17 +24,26 @@ function App() {
   const [endDate, setEndDate] = useState('');
   const [recommendedHours, setRecommendedHours] = useState(null);
 
-
-  
-
+  // Get ICS data
   // Get ICS data
   const handleGetICSData = async (file) => {
     try {
       const response = await fetch(`/api/ics?file=${file}`);
+      if (!response.ok) {
+        if (response.status === 404) {
+          alert('Sorry, this schedule does not exist.');
+        } else {
+          alert('Sorry this schedule has not been added yet.');
+        }
+        setEvents([]); // Clear any old events
+        return;
+      }
       const data = await response.json();
       setEvents(data);
     } catch (error) {
       console.error('Error fetching .ics data:', error);
+      alert('Error fetching schedule data.');
+      setEvents([]);
     }
   };
 
