@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Login.css';
 
-function Login() {
+export default function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,6 +26,7 @@ function Login() {
       if (response.ok) {
       localStorage.setItem('token', data.token); // save token to local storage
       alert("You're logged in!");
+      navigate('/dashboard', { replace: true });
       } else {
         alert(data.message || "Login failed");
       }
@@ -33,7 +37,9 @@ function Login() {
   };
 
   return (
+    <div className="login-form">
     <form onSubmit={handleSubmit}>
+      <img src="src/assets/login-person.png" alt="Logo" className="logo" />
       <input
         type="text"
         placeholder="Username"
@@ -47,11 +53,10 @@ function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-      />
-      
+      />     
       <button type="submit">Login</button>
     </form>
+    </div>
   );
 }
 
-export default Login;

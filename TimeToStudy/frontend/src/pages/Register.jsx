@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Reg.css';
 
-function RegisterForm() {
+export default function RegisterForm() {
+  const navigate = useNavigate();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [username, setUsername] = useState('');
@@ -10,8 +13,9 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
+    const apiUrl = import.meta.env.VITE_API_URL;
     console.log("Testing if API URL works: ", apiUrl);
+
     try {
       const response = await fetch(`${apiUrl}/register`, {
         method: 'POST',
@@ -22,55 +26,62 @@ function RegisterForm() {
       });
 
       const data = await response.json();
-      console.log(data); // see success message from backend
+      console.log(data);
 
+      if (response.ok) {
+        alert('Account created!');
+        navigate('/dashboard');
+      } else {
+        alert(data.message || 'Registration failed');
+      }
     } catch (err) {
       console.error('Error:', err);
+      alert('Something went wrong!');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="First Name"
-        value={firstname}
-        onChange={(e) => setFirstname(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="lastname"
-        value={lastname}
-        onChange={(e) => setLastname(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Register</button>
-    </form>
+    <div className="auth-form">
+      <h2>Create an Account</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 }
 
-export default RegisterForm;
-
-  

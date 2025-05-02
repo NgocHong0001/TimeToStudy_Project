@@ -2,16 +2,25 @@ import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import RegisterForm from './pages/Register';
 import './styles/App.css';
+//This is router for the app, it will be used to navigate between pages
+//import { useState } from 'react'
 import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import Schedules from './pages/Schedules';
+import Layout2 from './Layout2';
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import Planner from './pages/Planner';
+import Schedule from './pages/Schedule';
+
 
 function RouterWrapper() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      {/* Public layout, Home default route */}
+      <Route path="/" element={<Layout />}> 
         <Route index element={<Home />} />
         <Route path="register" element={<RegisterForm />} />
         <Route path="app" element={<App />} />
@@ -19,6 +28,16 @@ function RouterWrapper() {
         <Route path="login" element={<Login />} />
         
         <Route path="schedules" element={<Schedules />} /> 
+        
+      </Route>
+    
+
+      {/* Logged-in layout used for multiple separate paths */}
+      <Route element={<Layout2 />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/planner" element={<Planner />} />
+        <Route path="/schedule" element={<Schedule />} />
       </Route>
     </Routes>
   );
