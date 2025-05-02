@@ -10,6 +10,8 @@ import Register from './pages/register';
 import Layout2 from './Layout2';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Planner from './pages/Planner';
+import Schedule from './pages/Schedule';
 
 
 export default function App() {
@@ -27,6 +29,8 @@ export default function App() {
       <Route element={<Layout2 />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/planner" element={<Planner />} />
+        <Route path="/schedule" element={<Schedule />} />
       </Route>
     </Routes>
   )

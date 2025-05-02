@@ -14,9 +14,9 @@ export default function Layout2() {
 
           <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/overview.png" alt="Overview" className="nav-icon" /><span>Overview</span></Link></li>
 
-          <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/planner.png" alt="Planner" className="nav-icon" /><span>Planner</span></Link></li>
+          <li><Link to="/planner" className="sidebar-link"><img src="src/assets/planner.png" alt="Planner" className="nav-icon" /><span>Planner</span></Link></li>
 
-          <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/schedule.png" alt="Scedule" className="nav-icon" /><span>Schedule</span></Link></li>
+          <li><Link to="/schedule" className="sidebar-link"><img src="src/assets/schedule.png" alt="Scedule" className="nav-icon" /><span>Schedule</span></Link></li>
 
           <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/bx_log-out.png" alt="Log-out" className="nav-icon" /><span>Log out</span></Link></li>
 
