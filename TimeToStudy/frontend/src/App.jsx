@@ -8,13 +8,14 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
+import LogOut from './pages/LogOut';
 import Schedules from './pages/Schedules';
 import Layout2 from './Layout2';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Planner from './pages/Planner';
 import Schedule from './pages/Schedule';
-
+import ProtectedRoute from './components/ProtectedRoute';
 
 function RouterWrapper() {
   return (
@@ -26,6 +27,7 @@ function RouterWrapper() {
         <Route path="app" element={<App />} />
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
+        <Route path="logout" element={<LogOut />} />
         
         <Route path="schedules" element={<Schedules />} /> 
         
@@ -34,10 +36,26 @@ function RouterWrapper() {
 
       {/* Logged-in layout used for multiple separate paths */}
       <Route element={<Layout2 />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/planner" element={<Planner />} />
-        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+            </ProtectedRoute>
+            } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+            </ProtectedRoute>
+          } />
+        <Route path="/planner" element={
+          <ProtectedRoute>
+            <Planner />
+            </ProtectedRoute>
+            } />
+        <Route path="/schedule" element={
+          <ProtectedRoute>
+          <Schedule  />
+          </ProtectedRoute>
+          } />
       </Route>
     </Routes>
   );

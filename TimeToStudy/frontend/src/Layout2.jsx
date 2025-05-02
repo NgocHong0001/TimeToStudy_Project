@@ -18,7 +18,7 @@ export default function Layout2() {
 
           <li><Link to="/schedule" className="sidebar-link"><img src="src/assets/schedule.png" alt="Scedule" className="nav-icon" /><span>Schedule</span></Link></li>
 
-          <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/bx_log-out.png" alt="Log-out" className="nav-icon" /><span>Log out</span></Link></li>
+          <li><Link to="/logout" className="sidebar-link"><img src="src/assets/bx_log-out.png" alt="Log-out" className="nav-icon" /><span>Log out</span></Link></li>
 
           <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/help.png" alt="Help" className="nav-icon" /><span>Help</span></Link></li>
         </ul>

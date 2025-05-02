@@ -23,14 +23,7 @@ export default function Layout() {
             <span></span>
             <span></span>
           </div>
-          </nav>
 
-        <nav className="side-navbar">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/register">Register</Link>
-          <Link to ="/login">Login</Link>
-          <Link to="/schedules">Scheduels</Link>
           <ul className="navbar-links">
             <li><Link to="/"><img src="src/assets/home.png" alt="log-in"></img><span>Home</span></Link></li>
             <li><Link to="/about"><img src="src/assets/about-us.png" alt="about us"></img><span>About Us</span></Link></li>

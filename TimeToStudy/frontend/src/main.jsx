@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'; //enable page routing
 import './styles/App.css';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+//import './index.css' The cause of the website being set to the left.
 import ReactDOM from 'react-dom/client';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
