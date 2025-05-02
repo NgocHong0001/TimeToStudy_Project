@@ -6,7 +6,7 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
-
+import Schedules from './pages/Schedules';
 
 function RouterWrapper() {
   return (
@@ -17,6 +17,8 @@ function RouterWrapper() {
         <Route path="app" element={<App />} />
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
+        
+        <Route path="schedules" element={<Schedules />} /> 
       </Route>
     </Routes>
   );

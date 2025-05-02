@@ -39,6 +39,8 @@ mongoose.connect(DB_MONGODB)
 app.listen(DB_PORT, () => {
     console.log(`Server running on http://localhost:${DB_PORT}..`);
 });
+app.use('/schema', express.static(path.join(__dirname, '../schedules')));
+
 
 app.get('/api/ics', (req, res) => {
   const fileName = req.query.file; 
