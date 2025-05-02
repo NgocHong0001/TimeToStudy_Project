@@ -10,6 +10,8 @@ const port = 5000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+app.use('/schema', express.static(path.join(__dirname, '../schedules')));
+
 
 app.get('/api/ics', (req, res) => {
   const fileName = req.query.file; 
