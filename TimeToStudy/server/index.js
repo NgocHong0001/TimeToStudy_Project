@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 const PORT = 5000;
-// Where we run everything
+// Where we run everything in schedule
 const cors = cors();
 const app = express();
 app.get('/', (req, res) => {
