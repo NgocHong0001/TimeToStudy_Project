@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Dropdown options
 const schools = [
   { value: 'hkr', label: 'HKR' },
-  { value: 'lnu', label: 'LNU' },
+  { value: 'lnu', label: 'Malmö Universitet' },
   { value: 'umu', label: 'LTH' },
 ];
 

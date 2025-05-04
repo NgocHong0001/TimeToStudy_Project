@@ -31,12 +31,21 @@ function App() {
   const handleGetICSData = async (file) => {
     try {
       const response = await fetch(`/api/ics?file=${file}`);
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert(errorData.error || 'Failed to load schedule. Please check your selection.');
+        return;
+      }
+  
       const data = await response.json();
       setEvents(data);
     } catch (error) {
       console.error('Error fetching .ics data:', error);
+      alert('An unexpected error occurred while loading your schedule.');
     }
   };
+  
 
   // Navigation functions
   const nextWeek = () => {

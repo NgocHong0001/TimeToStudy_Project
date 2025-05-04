@@ -5,6 +5,7 @@ import MobileSchedule from '../components/MobileSchedule'; // Assuming this work
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedulestwo.css';
 
+
 const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 

@@ -49,12 +49,17 @@ app.get('/api/ics', (req, res) => {
   }
 
   const icsFilePath = path.join(__dirname, fileName);
-
   fs.readFile(icsFilePath, 'utf8', (err, data) => {
     if (err) {
+      if (err.code === 'ENOENT') {
+        return res.status(404).json({ error: 'Schedule file not found' });
+      }
       console.error('Error reading ICS file:', err);
       return res.status(500).json({ error: 'Error reading ICS file' });
     }
+
+
+  
 
     try {
       const jcalData = ICAL.parse(data);
