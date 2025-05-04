@@ -69,7 +69,7 @@ function App() {
           <MobileSchedule events={events} studyEvents={studyEvents} currentWeekStart={currentWeekStart} weekDates={weekDates} hours={hours} days={days} />
         </>
       ) : (
-        <p className="no-events-text">🎓 "Study smart, not harder — efficiency turns effort into achievement." </p>
+        <p className="no-events-text">🎓 "Study smart, not harder — efficiency turns effort into achievement." by Time2Study </p>
       )}
     </div>
   );

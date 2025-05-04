@@ -173,11 +173,11 @@ function ScheduleByMonth() {
                     {event.startDate}
                   </strong> - {event.summary}s
                   <br />
-                  <em>Location: {event.location || 'Not specified'}</em>
+                  <em>📍 Building: {event.location || 'Not specified'}</em>
                   <br />
-                  <em>Start: {event.startTime}</em>
+                  <em>📘 Start: {event.startTime}</em>
                   <br />
-                  <em>End: {event.endTime}</em>
+                  <em>📕 End: {event.endTime}</em>
                   
                 </li>
               );
