@@ -1,7 +1,7 @@
 
   
   .app-container {
-    background-color: #eaeaea; 
+    background-color: white; 
     color: black; 
     min-height: 100vh;
     padding: 20px;
@@ -62,7 +62,7 @@
   
   /* Table Headers */
   .schedule-table th {
-    background-color: #a2a2b5; 
+    background-color: #7ab79b; 
     color: black;
     padding: 10px;
     text-align: center;
@@ -71,7 +71,7 @@
   
   /* Table Cells */
   .schedule-table td {
-    background-color: #d2d2da;
+    background-color: #e9f7fc;
     padding: 10px;
     border: 1px solid #3d3d5c;
     vertical-align: top;
@@ -89,7 +89,7 @@
   
   /* Event Box */
   .event-box {
-    background-color: #9b96c6;
+    background-color: #8ac291;
     color: black;
     border-radius: 8px;
     padding: 8px;
@@ -127,7 +127,7 @@
   
   .red-event {
     color: black;
-    background-color: rgb(170, 97, 97);
+    background-color: rgb(194, 122, 122);
     font-weight: bold;
   }
   
@@ -142,7 +142,7 @@
   .study-planner {
     margin-top: 2rem;
     padding: 2rem;
-    background-color: #d2d2da;
+    background-color: #e9f7fc;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -209,7 +209,7 @@
   .file-selector {
     margin: 1.5rem 0; /* Removed auto centering */
     padding: 1rem 1.5rem;
-    background-color: #d2d2da;
+    background-color: #e9f7fc;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;

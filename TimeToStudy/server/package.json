@@ -14,8 +14,11 @@
         "ical.js": "^2.1.0",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.14.1"
+<<<<<<< HEAD
     },
     "devDependencies": {
         "nodemon": "^3.1.10"
+=======
+>>>>>>> 005593a9322572786fc262b92aa282828bfa5291
     }
 }
