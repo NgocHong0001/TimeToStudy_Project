@@ -9,6 +9,11 @@ import { createRoot } from 'react-dom/client'
 //import './index.css' The cause of the website being set to the left.
 import ReactDOM from 'react-dom/client';
 
+import AOS from 'aos'; // AOS library for animations
+import 'aos/dist/aos.css';
+
+AOS.init();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

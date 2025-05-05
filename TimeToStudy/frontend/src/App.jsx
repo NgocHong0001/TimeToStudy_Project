@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Planner from './pages/Planner';
 import Schedule from './pages/Schedule';
+import Admin from './pages/Admin';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function RouterWrapper() {
@@ -28,8 +29,6 @@ function RouterWrapper() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<LogOut />} />
-        
-        <Route path="schedules" element={<Schedules />} /> 
         
       </Route>
     
@@ -54,6 +53,11 @@ function RouterWrapper() {
         <Route path="/schedule" element={
           <ProtectedRoute>
           <Schedule  />
+          </ProtectedRoute>
+          } />
+        <Route path="/admin" element={
+          <ProtectedRoute>
+          <Admin  />
           </ProtectedRoute>
           } />
       </Route>
