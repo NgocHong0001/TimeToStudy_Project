@@ -9,7 +9,7 @@ import '../styles/schedules.css';
 const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-function App() {
+function School_sch() {
   // State
   const [school, setSchool] = useState('');
   const [program, setProgram] = useState('');
@@ -188,4 +188,4 @@ function App() {
   );
 }
 
-export default App;
+export default School_sch;

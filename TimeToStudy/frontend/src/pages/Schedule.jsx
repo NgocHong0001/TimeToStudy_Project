@@ -9,7 +9,7 @@ import '../styles/schedulestwo.css';
 const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-function App() {
+function School_sch() {
   const [events, setEvents] = useState([]);
   const [studyEvents, setStudyEvents] = useState([]); 
   const [selectedFile, setSelectedFile] = useState('');
@@ -76,4 +76,4 @@ function App() {
   );
 }
 
-export default App;
+export default School_sch;
