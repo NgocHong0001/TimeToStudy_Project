@@ -3,6 +3,7 @@ import StudyPlanner from '../components/StudyPlanner';
 import FileSelector from '../components/FileSelector'; //This files works as expected, but the system thinks you have type error.
 import ScheduleTable from '../components/ScheduleTable';
 import MobileSchedule from '../components/MobileSchedule';
+import StudyTextForm from '../components/StudyTextForm';
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedules.css';
 
@@ -154,8 +155,10 @@ function School_sch() {
           recommendedHours
         }}
       />
-      {/* File Selector */}
-      <FileSelector
+      {/* Container for both StudyTextForm and FileSelector */}
+      <div className="study-and-file-selector-container">
+        {/* File Selector */}
+        <FileSelector
         {...{
           school,
           setSchool,
@@ -164,8 +167,13 @@ function School_sch() {
           year,
           setYear,
           handleGetICSData
-        }}
-      />
+    }}/>{/* Study Text Form */} 
+    <StudyTextForm /> 
+
+ 
+</div>
+
+      
       {/* Week Navigation */}
       <div className="month-week">
         {currentWeekStart.toLocaleString('default', { month: 'long' })} {currentWeekStart.getFullYear()} — Week {getWeekNumber(currentWeekStart)}

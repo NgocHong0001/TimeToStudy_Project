@@ -25,7 +25,7 @@ function RouterWrapper() {
       <Route path="/" element={<Layout />}> 
         <Route index element={<Home />} />
         <Route path="register" element={<RegisterForm />} />
-        <Route path="school_sch" element={<School_sch />} /> {/* Changed every function with the same name */}
+        <Route path="school_sch" element={<School_sch />} /> {/* Changed every function with the same name and import */}
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<LogOut />} />

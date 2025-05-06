@@ -23,6 +23,21 @@
     margin-bottom: 20px;
     color: black;
   }
+
+  
+/* Container for the StudyTextForm and FileSelector */
+.study-and-file-selector-container {
+  display: flex;
+  justify-content: space-between; /* Space between the two components */
+  gap: 20px; /* Add some spacing between them */
+}
+
+/* Optionally, you can limit the width of the components if needed */
+.study-and-file-selector-container > * {
+  flex: 1; /* Allow both components to take equal width */
+  min-width: 0; /* Prevent overflowing */
+}
+
   
   /* Buttons */
   .load-button, .week-button {
@@ -50,14 +65,16 @@
   
   /* Table container */
   .table-container {
-    overflow-x: auto;
-    margin-top: 20px;
+    margin-top: 60px; /* Ensure there's space for the fixed buttons */
+    max-height: 80vh; /* Set a max height to prevent it from growing too large */
+    overflow-y: auto; /* Enables scrolling when the table's content exceeds max height */
   }
   
   /* Full table */
   .schedule-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
   }
   
   /* Table Headers */
@@ -239,11 +256,7 @@
 
   
   
-
-
-
-  /* Your existing styles remain unchanged above */
-/* Hide or show based on screen size */
+/* show based on screen size */
 @media (max-width: 768px) {
     .desktop-only {
       display: none;
