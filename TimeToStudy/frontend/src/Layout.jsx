@@ -12,9 +12,9 @@ export default function Layout() {
       <div className="layout">
         <header className="header">
         <div className="title">
-      <img src="src/assets/logo (1).png" alt="Logo" className="logo" />
-      <h1>Time2Study</h1>
-    </div>
+          <img src="src/assets/logo (1).png" alt="Logo" className="logo" />
+          <h1>Time2Study</h1>
+        </div>
         </header>
 
         <nav className="right-side-navbar">
