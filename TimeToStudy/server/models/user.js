@@ -29,10 +29,12 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     lowercase: true, 
+    match: [/\S+@\S+\.\S+/, 'Please use a valid email address']
   },
   password: {
     type: String,
     required: true,
+    minlength: 6 // Minimum length of password
   }
 }, { timestamps: true });
 
@@ -47,6 +49,13 @@ UserSchema.pre('save', async function (next) {
   } catch (err) {
     next(err);
   }
+});
+
+UserSchema.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.password;
+    return ret;
+  },
 });
 
 // Function to compare passwords when logging in.

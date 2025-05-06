@@ -1,7 +1,6 @@
 import express from 'express';
-import { registerUser } from '../controllers/userController.js'; 
+import { registerUser, getUsers, getUserProfile} from '../controllers/userController.js'; 
 import { protect } from '../middleware/auth.js';
-import { getUserProfile } from '../controllers/userController.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
 import { get } from 'http';
 import { log } from 'console';
@@ -19,6 +18,10 @@ router.get('/profile', protect, getUserProfile);
 
 // Login user
 router.post('/login', loginUser);
+
+router.get('/schedule', protect);
+
+router.get('/users', getUsers);
 
 export default router;
 

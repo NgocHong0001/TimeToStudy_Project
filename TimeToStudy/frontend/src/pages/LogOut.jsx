@@ -9,6 +9,6 @@ export default function Logout() {
     //Redirect to the home page after logout
     navigate('/');
   }, []);
-
+  
   return null; 
 }

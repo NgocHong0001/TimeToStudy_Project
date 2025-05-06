@@ -30,7 +30,6 @@ export default function Login() {
       } else {
         alert(data.message || "Login failed");
       }
-
     } catch (err) {
       console.error('Error:', err);
     }
