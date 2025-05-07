@@ -22,23 +22,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send("Time To Study");
-});
-
-app.use('/api/users', userRoute);
-
 // Connect to MongoDB
 console.log("Trying to connect to MongoDB...");
 mongoose.connect(DB_MONGODB)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .then(() => {
+  console.log('MongoDB connected');
 
-  console.log("It was called.");
+  app.use('/api/users', userRoute);
 
-app.listen(DB_PORT, () => {
+  //app.get('/api/save-planer', userRoute)
+
+  app.listen(DB_PORT, () => {
     console.log(`Server running on http://localhost:${DB_PORT}..`);
 });
+})
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+});
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
 app.use('/schema', express.static(path.join(__dirname, '../schedules')));
 
 
@@ -57,10 +62,7 @@ app.get('/api/ics', (req, res) => {
       console.error('Error reading ICS file:', err);
       return res.status(500).json({ error: 'Error reading ICS file' });
     }
-
-
-  
-
+    
     try {
       const jcalData = ICAL.parse(data);
       const comp = new ICAL.Component(jcalData);

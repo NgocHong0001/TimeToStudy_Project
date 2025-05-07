@@ -6,6 +6,7 @@ import MobileSchedule from '../components/MobileSchedule';
 import StudyTextForm from '../components/StudyTextForm';
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedules.css';
+import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
 
 const hours = Array.from({ length: 13 }, (_, i) => i + 8);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -23,6 +24,9 @@ function School_sch() {
   const [studyPace, setStudyPace] = useState(100); // set it for you
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [userId, setUserId] = useState(''); // Assuming you have a way to get the user ID. Frida.
+  const [startDateTime, setStartDateTime] = useState(''); // Added startDateTime. Frida
+  const [endDateTime, setEndDateTime] = useState(''); // Added endDateTime. Frida
   const [recommendedHours, setRecommendedHours] = useState(null);
 
 
@@ -114,6 +118,10 @@ function School_sch() {
           break;
         }
 
+        //Trying something out here. Frida
+        /*const startDateTime = new Date(`${dateStr}T${startTimeStr}:00`);
+        const endDateTime = new Date(`${dateStr}T${endTimeStr}:00`);*/
+
         const studyEvent = {
           summary: `Study Session (${studyType})`,
           location: 'Home or Library',
@@ -121,6 +129,8 @@ function School_sch() {
           endDate: sessionDate.toISOString().split('T')[0],
           startTime: startTimeStr,
           endTime: endTimeStr,
+          //startDateTime, // Added startDateTime
+          //endDateTime, // Added endDateTimes
           isStudySession: true
         };
 
@@ -136,6 +146,79 @@ function School_sch() {
     }
     setStudyEvents(newStudyEvents);
   };
+
+  const handleSavePlanner = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    let userId = null;
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        userId = decoded.userId;
+      } catch (err) {
+        console.error("Invalid token:", err);
+      }
+}
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/save-planner`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Include the token in the request headers
+        },
+        body: JSON.stringify({   
+          studyType,
+          studyPace,
+          startDate,
+          endDate,
+          startDateTime,
+          endDateTime,
+          recommendedHours,
+          studyEvents
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to save planner data');
+      }
+  
+      const data = await response.json();
+      console.log('Planner data saved successfully:', data);
+    } catch (error) {
+      console.error('Error saving planner data:', error);
+    }
+  }
+
+  useEffect(() => {
+    const fetchPlanner = async () => {
+    const token = localStorage.getItem("token");
+    console.log("Token: ", token);
+    if (!token) {
+      console.erro("No token found.");
+      return;
+    }
+    
+    try { 
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch planner data');  
+      }
+      const data = await response.json();
+      setEvents(data);
+
+      console.log('Fetched planner data:', data);
+    } catch (error) {
+      console.error('Error fetching planner data:', error);
+    }
+  };
+  fetchPlanner();
+}, []);
 
   return (
     <div className="app-container">
@@ -155,6 +238,8 @@ function School_sch() {
           recommendedHours
         }}
       />
+       <button className="save-button" onClick={handleSavePlanner}>Save Study Plan</button>
+     
       {/* Container for both StudyTextForm and FileSelector */}
       <div className="study-and-file-selector-container">
         {/* File Selector */}

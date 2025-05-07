@@ -1,10 +1,8 @@
 import express from 'express';
-import { registerUser } from '../controllers/userController.js'; 
+import { registerUser, getUserProfile, changePassword } from '../controllers/userController.js'; 
 import { protect } from '../middleware/auth.js';
-import { getUserProfile } from '../controllers/userController.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
-import { get } from 'http';
-import { log } from 'console';
+import { savePlanner, usersPlanner } from '../controllers/plannerController.js'; // Import the planner controller
 
 const router = express.Router();
 
@@ -17,8 +15,15 @@ router.post('/register', registerUser);
 // the request object as req.user
 router.get('/profile', protect, getUserProfile);
 
+router.post('/change-password', protect, changePassword);
+
 // Login user
 router.post('/login', loginUser);
+
+//Save user study plan
+router.put('/save-planner', protect, savePlanner);
+
+router.get('/users-planner', protect, usersPlanner);
 
 export default router;
 
