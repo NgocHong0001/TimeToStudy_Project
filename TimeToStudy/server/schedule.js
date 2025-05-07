@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
   res.send("Time To Study");
 });
 
+
 app.use('/schema', express.static(path.join(__dirname, '../schedules')));
 
 

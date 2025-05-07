@@ -8,7 +8,7 @@ export const usersPlanner = async (req, res) => {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const planner = await Planner.findOne({ user: userId });
+    const planner = await Planner.findOne({ userId });
     if (!planner) {
       return res.status(404).json({ error: 'Planner not found' });
     }
@@ -39,8 +39,9 @@ export const savePlanner = async (req, res) => {
     } = req.body;
 
     const newPlanner = await Planner.findOneAndUpdate(
-      { userId },
+      { userId: userId }, // Find user based on userId
       {
+        userId,
         studyType,
         studyPace,
         startDate,
@@ -48,7 +49,7 @@ export const savePlanner = async (req, res) => {
         recommendedHours,
         studyEvents
       },
-      { new: true, upsert: true } // skapa om den inte finns
+      { new: true, upsert: true } // Create a new document if it doesn't exist
     );
 
     res.status(200).json(newPlanner);

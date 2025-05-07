@@ -169,8 +169,8 @@ function School_sch() {
         body: JSON.stringify({   
           studyType,
           studyPace,
-          startDate,
-          endDate,
+          startDate: new Date(startDate).toISOString(),
+          endDate: new Date(endDate).toISOString(),
           startDateTime,
           endDateTime,
           recommendedHours,
@@ -194,7 +194,7 @@ function School_sch() {
     const token = localStorage.getItem("token");
     console.log("Token: ", token);
     if (!token) {
-      console.erro("No token found.");
+      console.error("No token found.");
       return;
     }
     
@@ -210,7 +210,7 @@ function School_sch() {
         throw new Error('Failed to fetch planner data');  
       }
       const data = await response.json();
-      setEvents(data);
+      setStudyEvents(Array.isArray(data.studyEvents) ? data.studyEvents : []);
 
       console.log('Fetched planner data:', data);
     } catch (error) {

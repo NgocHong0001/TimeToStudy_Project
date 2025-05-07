@@ -15,7 +15,7 @@ export const registerUser = async (req, res) => {
       lastname, 
       username, 
       email, 
-      password });
+      password }); //Security risk. Should never leave the server.
 
     await newUser.save();
     console.log(newUser); // Debug
@@ -36,22 +36,23 @@ export const getUsers = async (req, res) => {
 };
 
 export const getUserProfile = async (req, res) => {
-  const user = await User.findById(req.user.id); // Hämta användaren baserat på ID från token, exkludera lösenordet
-
-  if (user) {
+  try {
+    const user = req.user; // Users comes from the protect middleware
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     res.json({
       id: user._id,
       username: user.username,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      password: user.password,
+      password: user.password, //Security risk. Should never leave the server.
       
     });
 
-  } else {
-    res.status(404);
-    throw new Error('Användare hittades inte');
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
