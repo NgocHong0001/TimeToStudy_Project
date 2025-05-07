@@ -6,27 +6,50 @@ export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
     console.log("Testing if API URL works: ", apiUrl);
+
+    // Admin-only 
+    if (isAdmin) {
+      const allowedAdminUsername = 'admin';
+      const allowedAdminPassword = 'pokemon';
+
+      // If credentials match, login without backend
+      if (username === allowedAdminUsername && password === allowedAdminPassword) {
+        const mockToken = 'mock-admin-token'; // Mock token for admin
+        localStorage.setItem('token', mockToken); 
+        localStorage.setItem('isAdmin', 'true'); // Set isAdmin to true for admin
+
+        navigate('/dashboard', { replace: true });
+        return;
+      } else {
+        alert('Access denied. Invalid admin credentials.');
+        return;
+      }
+    }
+
     try {
       const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, role: 'user' }),
       });
 
       const data = await response.json();
       console.log(data); // see success message from backend
+
       if (response.ok) {
-      localStorage.setItem('token', data.token); // save token to local storage
-      alert("You're logged in!");
-      navigate('/dashboard', { replace: true });
+        localStorage.setItem('token', data.token); // save token to local storage
+        localStorage.setItem('isAdmin', 'false'); // set isAdmin to false for regular users
+        alert("You're logged in!");
+        navigate('/dashboard', { replace: true });
       } else {
         alert(data.message || "Login failed");
       }
@@ -38,24 +61,32 @@ export default function Login() {
 
   return (
     <div className="login-form">
-    <form onSubmit={handleSubmit}>
-      <img src="src/assets/login-person.png" alt="Logo" className="logo" />
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />     
-      <button type="submit">Login</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <img src="src/assets/login-person.png" alt="Logo" className="logo" />
+        <h2>{isAdmin ? 'Admin Login' : 'User Login'}</h2>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+        <button
+          type="button"
+          className="toggle-mode"
+          onClick={() => setIsAdmin((prev) => !prev)}
+        >
+          Switch to {isAdmin ? 'User' : 'Admin'} Mode
+        </button>
+      </form>
     </div>
   );
 }
