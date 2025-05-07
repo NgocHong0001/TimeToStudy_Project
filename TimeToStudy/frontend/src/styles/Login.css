@@ -1,11 +1,11 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 70vh;
   padding: 2rem;
-  background-color: #fdf6e3;
+  background-color: #eeeeee8f;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   max-width: 400px;
@@ -13,7 +13,7 @@
 }
 
 .login-form input {
-  width: 100%;
+  width: 80%;
   padding: 12px;
   margin: 8px 0;
   border: 1px solid #ccc;
@@ -24,7 +24,7 @@
 .login-form button {
   margin-top: 1rem;
   padding: 12px;
-  width: 100%;
+  width: 50%;
   background-color: #1b5638;
   color: white;
   border: none;
@@ -34,5 +34,5 @@
 }
 
 .login-form button:hover {
-  background-color: #14472d;
+  background-color: #F39C12;
 }

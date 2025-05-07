@@ -36,7 +36,6 @@ export default function Layout2() {
       </nav>
 
       <main className="content2">
-      <h1>This is Layout2 working!</h1>
         <Outlet />
       </main>
 

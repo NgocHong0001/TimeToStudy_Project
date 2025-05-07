@@ -13,12 +13,12 @@ export const loginUser = async (req, res) => {
         if (!match) return res.status(401).json( {message: "Wrong password."})
         
         const token = jwt.sign(
-            { id: user._id, username: user.username }, // payload
+            { id: user._id, username: user.username, firstname: user.firstname, lastname: user.lastname }, // payload + added firstname to the token so it can be called in Dasboard.jsx!
             process.env.JWT_SECRET,                    // secret key
             { expiresIn: '1h' }                        // expires in 1h
             );
 
-        res.status(200).json({token, username: user.username})
+        res.status(200).json({token, username: user.username, firstname: user.firstname, lastname: user.lastname}) // added firstname to the response so it can be called in Dashboard.jsx!
     } catch(error) {
         res.status(500).json({message: error.message});      
     }

@@ -43,6 +43,8 @@ const StudyPlanner = ({
         {recommendedHours && (
           <div className="study-result">
             📖 You should study approximately <strong>{recommendedHours}</strong> hours per day during this period.
+            <br />
+            Note: this is a suggested plan. You may need more or fewer hours depending on your personal pace
           </div>
         )}
       </div>

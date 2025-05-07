@@ -37,25 +37,25 @@ export default function Login() {
   };
 
   return (
-    <div className="login-form">
-    <form onSubmit={handleSubmit}>
-      <img src="src/assets/login-person.png" alt="Logo" className="logo" />
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />     
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <img src="src/assets/login-person.png" alt="Logo" className="logo" />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />     
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
