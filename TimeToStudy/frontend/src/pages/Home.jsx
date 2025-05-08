@@ -1,8 +1,45 @@
+import { Link } from 'react-router-dom';
+
 export default function Home() {
   return (
-    <div className="page">
-      <h1>Welcome to Time2Study!</h1>
-      <p>Plan your studies like a pro.</p>
-    </div>
+    <section className="hero-section">
+      <div className="hero-overlay">
+      {/*<img src="/src/assets/pexels-pixabay-159866.jpg" alt="Logo" className="hero-section" />*/}
+      </div>
+      
+
+      <div className="hero-paper" >
+        {/*<img src="src/assets/white-paper-texture.jpg" alt="paper-texture" />*/}
+        <div className="hero-text">
+          <h2>"Crush Your Deadlines with Confidence!"</h2>
+          <p>Time2Study helps you plan your study hours perfectly — no more stressing over schedules. Balance your studies, ace your goals, and still have time for life. We've got your back!</p>
+        </div>
+
+        
+      </div>
+
+      <div className="hero-boxes">
+        <div className="hero-box" data-aos="zoom-in" data-aos-duration="500">
+          <img src="src/assets/yellow-person.png" alt="yellow-person" />
+          <p>Log in or register your account to start your journey!</p>
+        </div>
+
+        <div className="hero-box" data-aos="zoom-in" data-aos-duration="800">
+          <img src="src/assets/yellow-schedule.png" alt="yellow-calendar" />
+          <p>Pick your school program schedule</p>
+        </div>
+
+        <div className="hero-box" data-aos="zoom-in" data-aos-duration="900">
+          <img src="src/assets/yellow-planner.png" alt="yellow-plan" />
+          <p>Let the system generate your personalized study plan</p>
+        </div>
+
+        <div className="hero-btn" data-aos="fade-up" data-aos-duration="1100">
+          <Link to="/register">
+            <button className="hero-actual-btn">Get Started</button>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

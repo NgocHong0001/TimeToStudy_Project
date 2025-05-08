@@ -1,24 +1,65 @@
 import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+import mongoose from 'mongoose';
 import fs from 'fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path, { dirname, join } from 'path';
 import ICAL from 'ical.js';
 
-const app = express();
-const port = 5000;
+// Routes
+import userRoute from './routes/userRoute.js';
+import adminRoute from './routes/adminRoute.js'; // <-- New import
 
+
+
+// Setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+dotenv.config({ path: join(__dirname, '.env') });
+
+
+const DB_PORT = process.env.PORT || 5000;
+const DB_MONGODB = process.env.MONGO_URI;
+
+console.log("URI from env:", process.env.MONGO_URI);
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
+// Routes
+app.use('/api/users', userRoute);
+app.use('/api/admin', adminRoute); 
+
+// MongoDB Connection
+console.log("Trying to connect to MongoDB...");
+mongoose.connect(DB_MONGODB)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+console.log("It was called.");
+
+// ICS file parser endpoint
+app.use('/schema', express.static(path.join(__dirname, '../schedules')));
+
+
+
 app.get('/api/ics', (req, res) => {
-  const fileName = req.query.file; 
+  const fileName = req.query.file;
   if (!fileName) {
     return res.status(400).json({ error: 'No file specified' });
   }
 
   const icsFilePath = path.join(__dirname, fileName);
-  
+
+
   fs.readFile(icsFilePath, 'utf8', (err, data) => {
     if (err) {
       if (err.code === 'ENOENT') {
@@ -70,6 +111,7 @@ app.get('/api/ics', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// Start server
+app.listen(DB_PORT, () => {
+  console.log(`Server running on http://localhost:${DB_PORT}..`);
 });

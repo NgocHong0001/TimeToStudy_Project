@@ -1,0 +1,68 @@
+/*styling of everything related to layout2*/
+
+.layout2 {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 1fr 0.07fr;
+  grid-template-columns: 0.12fr 1fr;
+  grid-template-areas: 
+    "navbar main"
+    "footer footer";
+  position: relative;
+}
+
+.left-side-navbar {
+  grid-area: navbar;
+  background-color: #104d27;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  justify-content: flex-start; /* Align links at the top cant see anything!!!! */
+  position: fixed;
+  z-index: 5; /* Ensure navbar is above other elements */
+  height: 100vh;
+  left: 0;
+  padding: 1rem;
+}
+
+.nav-icon{
+  filter: brightness(0) invert(1);
+  width: 35%;
+}
+
+.sidebar-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  gap: rem;
+}
+
+.sidebar-link:hover {
+  text-decoration: underline;
+}
+
+.left-side-navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-side-navbar li {
+  margin: 1.5rem 0;
+}
+
+.content2 {
+  grid-area: main;
+  padding: 2rem;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: #104d27c0;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}

@@ -1,51 +1,168 @@
+/*Styling of everything in layout file*/
+
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap');
 
+/* Base Layout */
 body {
   margin: 0;
   font-family: 'Abhaya Libre', sans-serif;
-  background-color: wheat;
+  background-color: rgb(222, 210, 188); /*Update background color*/
 }
 
 .layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 0.15fr 1fr 0.1fr;
+  grid-template-columns: 2fr 1fr 0.1fr;
+  grid-template-areas: 
+    "header header navbar"
+    "main main navbar"
+    "footer footer footer";
+  position: relative;
 }
 
 .header {
-  background-color: #104d27;
-  color: white;
-  padding: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
+  display: flex;
+  background-color: #104d27d2;
+  grid-area: header;
+  position: relative;
+  z-index: 1; /* Ensure header is above other elements */
+  padding-left: 1rem; /*moving the title+logo*/;
 }
 
-.side-navbar {
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0rem; /* space between logo and title */
+}
+
+.logo {
+  width: 25%;
+}
+
+.title h1 {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.right-side-navbar {
   background-color: #104d27;
   color: white;
   display: flex;
+  align-items: center; /* Center the links */
+  flex-direction: column; /* Align links in a column */
+  justify-content: flex-start; /* Center the links vertically */
+  grid-area: navbar;
+  position: fixed;
+  z-index: 5; /* Ensure navbar is above other elements */
+  padding: 1rem;
+  height: 100vh;
+  right: 0;
+}
+
+.navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
   flex-direction: column;
-  padding: 2rem 1rem;
-  width: 150px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1; /* pushes links to the vertical center */
+  gap: 1rem;
 }
 
-.side-navbar a {
+.navbar-links li a {
   color: white;
-  margin: 0.5rem 0;
   text-decoration: none;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the links */
+  gap: 0.5rem; /* space between icon and text */
 }
 
-.side-navbar a:hover {
+.navbar-links li a:hover {
+  text-decoration: underline;
+}
+
+.navbar-links li a img {
+  width: 2rem;  /* or your desired size */
+}
+
+/* Toggle button (hamburger) */
+.toggle-btn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  z-index: 5;
+  position: absolute; /* Position it relative to the navbar */
+}
+
+.toggle-btn span {
+  width: 30px;
+  height: 4px;
+  background: white;
+  display: block;
+  margin: 3px;
+  border-radius: 1px;
+}
+
+.toggle-btn :hover {
+  background: rgb(243, 156, 18); /* Redo this hover!! */
+}
+
+/* Slide-out panel */
+#menu-slideout {
+  position: fixed;
+  top: 0;
+  right: -110%;  /* Hidden by default */
+  width: 100%;
+  background-color: #104d27a1;
+  padding: 2rem;
+  transition: right 0.8s ease;
+  z-index: 1; /* Ensure slide-out is above other elements */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+#menu-slideout.open {
+  right: 4%;
+}
+
+.menu-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row; /* Align links in a row */
+  justify-content: end; /* Center the links vertically */
+  height: 100%;
+}
+
+.menu-links li {
+  margin: 1rem;
+  z-index: 10;
+}
+
+.menu-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.menu-links a:hover {
   text-decoration: underline;
 }
 
 .main-layout {
-  flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  grid-area: main;
+  padding: 2rem;
 }
 
+/* The main layout is a flex container that allows for a flexible layout of its children like home, about login etc*/
 .content {
   flex: 1;
   padding: 2rem;
@@ -60,3 +177,115 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.footer {
+  background-color: #104d27;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  grid-area: footer;
+}
+
+
+/* Home/Hero section styles */
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background-image: url('/src/assets/pexels-pixabay-159866.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Ensures the image covers the entire section */
+  z-index: -1; /* Ensure the hero section is behind other elements */
+  overflow: hidden;
+}
+
+.hero-paper {
+  margin-top: 40vh; /* pulls up slightly to overlap the book image */
+  background: url('/src/assets/white-paper-texture.jpg') center/cover no-repeat;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5rem;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+.hero-box {
+  display: flex;
+  align-items: center;
+  background-color: #e6e2dc;
+  padding:2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 90%;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-box img {
+  width: 15%;
+}
+
+.hero-box p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.hero-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-actual-btn {
+  background: #104d27;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  font-family: 'Abhaya Libre', sans-serif;
+}
+
+.hero-actual-btn:hover {
+  background: rgb(243, 156, 18);
+}
+
+/*Responsiv*/
+@media (max-width: 1024px) {
+  .hero-paper {
+    margin-top: 40vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-paper {
+    margin-top: 40vh;
+  }
+}

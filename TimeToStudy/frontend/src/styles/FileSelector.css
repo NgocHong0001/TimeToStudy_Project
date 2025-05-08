@@ -1,0 +1,48 @@
+.file-selector {
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .file-selector h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .file-selector label {
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .file-selector select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .file-selector select:focus {
+    outline: none;
+    border-color: #5d9bfa;
+  }
+  
+  .file-selector .load-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .file-selector .load-button:hover {
+    background-color: #45a049;
+  }
+  
