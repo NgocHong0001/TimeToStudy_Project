@@ -19,7 +19,7 @@ router.get('/data', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+/*router.post('/create', async (req, res) => {
   const { username, firstname, lastname, password } = req.body;
   try {
     const user = new User({ username, firstname, lastname, password });
@@ -28,7 +28,7 @@ router.post('/create', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'User creation failed' });
   }
-});
+});*/ //migth need for future use for admin Mi
 
 router.put('/update/:id', async (req, res) => {
   try {

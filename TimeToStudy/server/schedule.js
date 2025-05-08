@@ -38,12 +38,26 @@ app.use('/api/admin', adminRoute);
 // MongoDB Connection
 console.log("Trying to connect to MongoDB...");
 mongoose.connect(DB_MONGODB)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .then(() => {
+  console.log('MongoDB connected');
+
+  app.use('/api/users', userRoute);
 
 console.log("It was called.");
 
-// ICS file parser endpoint
+  app.listen(DB_PORT, () => {
+    console.log(`Server running on http://localhost:${DB_PORT}..`);
+});
+})
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+});
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
+
 app.use('/schema', express.static(path.join(__dirname, '../schedules')));
 
 
@@ -105,6 +119,6 @@ app.get('/api/ics', (req, res) => {
 });
 
 // Start server
-app.listen(DB_PORT, () => {
+/*app.listen(DB_PORT, () => {
   console.log(`Server running on http://localhost:${DB_PORT}..`);
-});
+});*/

@@ -14,19 +14,19 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign(
       {
         id: user._id,
-        username: user.username, 
-        firstname: user.firstname, 
-        lastname: user.lastname,// payload + added firstname to the token so it can be called in Dasboard.jsx!
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
         isAdmin: user.isAdmin,
       },
-      process.env.JWT_SECRET,// secret key
-      { expiresIn: '1h' }// expires in 1h
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
     );
 
     res.status(200).json({
       token,
-      username: user.username, 
-      firstname: user.firstname, 
+      username: user.username,
+      firstname: user.firstname,
       lastname: user.lastname,
       isAdmin: user.isAdmin,
     });
