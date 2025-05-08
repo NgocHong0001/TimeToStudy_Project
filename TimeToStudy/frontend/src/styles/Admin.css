@@ -1,0 +1,11 @@
+.Admin-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}

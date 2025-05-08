@@ -9,12 +9,15 @@ export default function Layout2() {
     <div className="layout2">
       <nav className="left-side-navbar">
         <ul>
-          <li>
-            <Link to="/admin" className="sidebar-link">
-              <img src="src/assets/admin.png" alt="Admin" className="nav-icon" />
-              <span>Admin</span>
-            </Link>
-          </li>
+          {/* ✅ Admin link only visible for admin users */}
+          {localStorage.getItem('isAdmin') === 'true' && (
+            <li>
+              <Link to="/admin" className="sidebar-link">
+                <img src="src/assets/admin.png" alt="Admin" className="nav-icon" />
+                <span>Admin</span>
+              </Link>
+            </li>
+          )}
 
           <li>
             <Link to="/profile" className="sidebar-link">

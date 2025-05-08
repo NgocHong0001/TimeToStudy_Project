@@ -1,0 +1,41 @@
+@startuml
+skinparam componentStyle rectangle
+package "Frontend (React)" {
+  component "App.jsx" as App
+  component "main.jsx" as Main
+  component "Layout.jsx" as Layout1  
+  component "Layout2.jsx" as Layout2
+
+  package "pages" {
+    component "HomePage"
+    component "SchedulePage"
+    component "StudyPlannerPage"
+  }
+
+  package "components" {
+    component "Clock"
+    component "ScheduleTable"
+    component "MotivationalQuote"
+  }
+
+  package "hooks" {
+    component "useScheduleLoader"
+    component "useMonthFilter"
+  }
+
+  Main --> App
+  App --> HomePage
+  App --> SchedulePage
+  App --> StudyPlannerPage
+
+  HomePage --> Layout1
+  SchedulePage --> Layout2
+  SchedulePage --> ScheduleTable
+  StudyPlannerPage --> Clock
+  StudyPlannerPage --> MotivationalQuote
+
+  ScheduleTable --> useScheduleLoader
+  ScheduleTable --> useMonthFilter
+}
+
+@enduml

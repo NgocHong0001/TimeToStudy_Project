@@ -14,10 +14,8 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Planner from './pages/Planner';
 import Schedule from './pages/Schedule';
-import Admin from './pages/Admin';
 import ProtectedRoute from './components/ProtectedRoute';
-
-
+import Admin from './pages/Admin'; 
 
 function RouterWrapper() {
   return (
@@ -26,7 +24,7 @@ function RouterWrapper() {
       <Route path="/" element={<Layout />}> 
         <Route index element={<Home />} />
         <Route path="register" element={<RegisterForm />} />
-        <Route path="school_sch" element={<School_sch />} /> {/* Changed every function with the same name */}
+        <Route path="school_sch" element={<School_sch />} /> {/* Changed every function with the same name and import */}
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<LogOut />} />
@@ -55,11 +53,12 @@ function RouterWrapper() {
           <Schedule  />
           </ProtectedRoute>
           } />
-        <Route path="/admin" element={
-          <ProtectedRoute>
-          <Admin  />
-          </ProtectedRoute>
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
           } />
+        
       </Route>
     </Routes>
   );
@@ -69,3 +68,4 @@ export default RouterWrapper;
 
 function School_sch() {
 }
+

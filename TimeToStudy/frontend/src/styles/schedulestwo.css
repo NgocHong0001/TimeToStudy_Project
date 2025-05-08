@@ -81,6 +81,7 @@ body {
 
 .schedule-month-container button:hover {
   background-color: #F39C12;
+  transition: background-color 0.3s ease;
 }
 
 .schedule-month-container button:disabled {

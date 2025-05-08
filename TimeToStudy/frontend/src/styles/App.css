@@ -98,6 +98,8 @@ body {
   cursor: pointer;
   z-index: 5;
   position: absolute; /* Position it relative to the navbar */
+  padding: 0.5rem; /* Add padding so the hover area includes all spans */
+  transition: background 0.3s ease;
 }
 
 .toggle-btn span {
@@ -107,10 +109,11 @@ body {
   display: block;
   margin: 3px;
   border-radius: 1px;
+  transition: background 0.3s ease;
 }
 
-.toggle-btn :hover {
-  background: rgb(243, 156, 18); /* Redo this hover!! */
+.toggle-btn:hover span {
+  background: rgb(243, 156, 18); /* All spans change color on hover */
 }
 
 /* Slide-out panel */

@@ -41,12 +41,20 @@ const StudyPlanner = ({
         </button>
 
         {recommendedHours && (
-          <div className="study-result">
-            📖 You should study approximately <strong>{recommendedHours}</strong> hours per day during this period.
-            <br />
-            Note: this is a suggested plan. You may need more or fewer hours depending on your personal pace
-          </div>
-        )}
+          <div className="mt-8 bg-gray-100 rounded-lg shadow p-6 text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Abhaya Libre', serif" }}>
+              Suggested daily study hours (weekdays)
+              </h3>
+              <p className="text-sm text-gray-600 mb-6">
+                Note: this is a suggested plan. You may need more or fewer hours depending on your personal pace
+                </p>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="px-6 py-3 bg-white text-black text-lg rounded-full shadow-sm border">
+                    {recommendedHours}h / day
+                    </div>
+                  </div>
+                </div>
+              )}
       </div>
     </div>
   );

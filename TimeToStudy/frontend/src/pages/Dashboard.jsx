@@ -45,6 +45,7 @@ export default function Dashboard() {
         <div className="Notice-table">
           <p>Notis</p>
         </div>
+        
       </div>
 
       
