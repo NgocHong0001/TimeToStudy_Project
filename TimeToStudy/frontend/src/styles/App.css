@@ -13,7 +13,7 @@ body {
   display: grid;
   height: 100vh;
   grid-template-rows: 0.15fr 1fr 0.1fr;
-  grid-template-columns: 2fr 1fr 0.1fr;
+  grid-template-columns: 3fr 1fr 0.1fr;
   grid-template-areas: 
     "header header navbar"
     "main main navbar"
@@ -38,6 +38,7 @@ body {
 
 .logo {
   width: 25%;
+  margin-bottom: 0;
 }
 
 .title h1 {
