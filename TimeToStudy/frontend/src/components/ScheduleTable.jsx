@@ -14,7 +14,7 @@ const isSameWeek = (dateStr, currentWeekStartStr) => {
   return dayDiff >= 0 && dayDiff < 7;
 };
 
-// Simple EventBox component
+// Simple EventBox components
 const EventBox = ({ event }) => {
   const isImportant = ['assignment', 'test', 'seminar', 're-seminar', 'examination', 'exam', 're-exam']
     .some(keyword => event.summary.toLowerCase().includes(keyword));
