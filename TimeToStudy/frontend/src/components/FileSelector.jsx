@@ -13,11 +13,7 @@ const FileSelector = ({ school, setSchool, program, setProgram, year, setYear, h
         <option value="">-- Choose School --</option>
         <option value="hkr">HKR</option>
         <option value="lnu">LTH</option>
-<<<<<<< HEAD
-        <option value="umu">UMU</option>
-=======
         <option value="umu">Malmö Universitet</option>
->>>>>>> main
       </select>
 
       <label htmlFor="programSelect">Select Program:</label>
