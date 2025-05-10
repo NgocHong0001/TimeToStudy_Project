@@ -19,12 +19,15 @@ export default function Layout2() {
             </li>
           )}
 
-          <li>
-            <Link to="/profile" className="sidebar-link">
-              <img src="src/assets/person.png" alt="Profile" className="nav-icon" />
-              <span>Profile</span>
-            </Link>
-          </li>
+          {/* ✅ Profile link only visible for non-admin users */}
+          {localStorage.getItem('isAdmin') !== 'true' && (
+            <li>
+              <Link to="/profile" className="sidebar-link">
+                <img src="src/assets/person.png" alt="Profile" className="nav-icon" />
+                <span>Profile</span>
+              </Link>
+            </li>
+          )}
 
           <li><Link to="/dashboard" className="sidebar-link"><img src="src/assets/overview.png" alt="Overview" className="nav-icon" /><span>Overview</span></Link></li>
 
@@ -39,7 +42,6 @@ export default function Layout2() {
       </nav>
 
       <main className="content2">
-      <h1>This is Layout2 working!</h1>
         <Outlet />
       </main>
 

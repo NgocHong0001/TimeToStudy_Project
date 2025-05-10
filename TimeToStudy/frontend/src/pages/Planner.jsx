@@ -8,7 +8,7 @@ import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/schedule
 import '../styles/schedules.css';
 import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
 
-const hours = Array.from({ length: 13 }, (_, i) => i + 8);
+const hours = Array.from({ length: 18 }, (_, i) => i + 6);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 function School_sch() {
@@ -123,6 +123,7 @@ function School_sch() {
         const endTimeStr = `${String(endHour).padStart(2, '0')}:00`;
 
 
+
         if (endHour > 22) {
           break;
         }
@@ -132,15 +133,14 @@ function School_sch() {
         const endDateTime = new Date(`${dateStr}T${endTimeStr}:00`);*/
 
 
+
         const studyEvent = {
           summary: `Study Session (${studyType})`,
-          location: 'Home or Library',
+          location: '📍 Home or Library',
           startDate: sessionDate.toISOString().split('T')[0],
           endDate: sessionDate.toISOString().split('T')[0],
           startTime: startTimeStr,
           endTime: endTimeStr,
-          //startDateTime, // Added startDateTime
-          //endDateTime, // Added endDateTimes
           isStudySession: true
         };
   
@@ -157,8 +157,6 @@ function School_sch() {
     setRecommendedHours(hoursPerDay);
     setStudyEvents(newStudyEvents);
   };
-  
-  
 
   const handleSavePlanner = async (e) => {
     e.preventDefault();

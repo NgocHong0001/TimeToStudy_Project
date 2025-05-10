@@ -41,14 +41,27 @@ mongoose.connect(DB_MONGODB)
   .then(() => {
     console.log('MongoDB connected');
 
-    // Start the server after the MongoDB connection
-    app.listen(DB_PORT, () => {
-      console.log(`Server running on http://localhost:${DB_PORT}..`);
-    });
-  })
+
+
+  app.use('/api/users', userRoute);
+
+console.log("It was called.");
+
+  app.listen(DB_PORT, () => {
+    console.log(`Server running on http://localhost:${DB_PORT}..`);
+});
+})
+
   .catch((err) => {
     console.error('MongoDB connection error:', err);
   });
+
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
+
 
 app.use('/schema', express.static(path.join(__dirname, '../schedules')));
 
@@ -109,3 +122,9 @@ app.get('/api/ics', (req, res) => {
     }
   });
 });
+
+// Start server
+/*app.listen(DB_PORT, () => {
+  console.log(`Server running on http://localhost:${DB_PORT}..`);
+});*/
+

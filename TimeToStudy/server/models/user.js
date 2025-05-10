@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
-
-
 // Create schema for a new user.
 const UserSchema = new mongoose.Schema({
   /*userID: {

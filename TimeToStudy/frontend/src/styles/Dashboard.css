@@ -1,0 +1,40 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0; 
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.Date-table {
+  background-color: #f4c57a; /* More vibrant like reference */
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.Date-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.Notice-table {
+  background-color: #eeeeeee7; /*#eeeeeeb0*/
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}

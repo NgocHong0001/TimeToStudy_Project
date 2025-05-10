@@ -84,7 +84,7 @@ export default function Login() {
           className="toggle-mode"
           onClick={() => setIsAdmin((prev) => !prev)}
         >
-          Switch to {isAdmin ? 'User' : 'Admin'} Mode
+          Switch to {isAdmin ? 'User' : 'Admin'}
         </button>
       </form>
     </div>

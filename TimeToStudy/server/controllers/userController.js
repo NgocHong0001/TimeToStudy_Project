@@ -45,6 +45,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+
 export const getUserProfile = async (req, res) => {
   try {
     const user = req.user; // Users comes from the protect middleware

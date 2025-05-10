@@ -1,11 +1,10 @@
 
   
   .app-container {
-    background-color: white; 
+    background-color: hsla(0, 0%, 100%, 0.5); 
     color: black; 
     min-height: 100vh;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   /* Title */
@@ -53,7 +52,8 @@
   }
   
   .load-button:hover, .week-button:hover {
-    background-color: #5a4bcf;
+    background-color: #F39C12;
+    transition: background 0.3s ease;
   }
 
   .error-message {
@@ -159,7 +159,7 @@
   .study-planner {
     margin-top: 2rem;
     padding: 2rem;
-    background-color: #e9f7fc;
+    background-color: #eeeeee;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -212,21 +212,23 @@
   }
   
   .calculate-button:hover {
-    background-color: #45a049;
+    background-color: #F39C12;
+    transition: background 0.3s ease;
   }
   
   .study-result {
     margin-top: 1rem;
     font-size: 1.2rem;
-    color: darkgreen;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     text-align: center;
+  
   }
 
   .file-selector {
     margin: 1.5rem 0; /* Removed auto centering */
     padding: 1rem 1.5rem;
-    background-color: #e9f7fc;
+    background-color: #eeeeee;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;
@@ -234,7 +236,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
   }
   
   .file-selector label {
