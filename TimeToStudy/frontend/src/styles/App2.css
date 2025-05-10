@@ -4,7 +4,7 @@
   display: grid;
   height: 100vh;
   grid-template-rows: 1fr 0.07fr;
-  grid-template-columns: 0.07fr 1fr;
+  grid-template-columns: 0.09fr 1fr; /*might need adjustment when doing @meadia for now laptop screeen ok with centering content vs navbar*/
   grid-template-areas: 
     "navbar main"
     "footer footer";
@@ -16,13 +16,18 @@
   background-color: #104d27;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  
+  /*justify-content: center;*/
+  justify-content: flex-start; /* Align links at the top cant see anything!!!! */
+  position: fixed;
+  z-index: 5; /* Ensure navbar is above other elements */
+  height: 100vh;
+  left: 0;
+  padding: 1rem;
 }
 
 .nav-icon{
   filter: brightness(0) invert(1);
-  width: 25%;
+  width: 35%;
 }
 
 .sidebar-link {
@@ -46,7 +51,7 @@
 }
 
 .left-side-navbar li {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .content2 {

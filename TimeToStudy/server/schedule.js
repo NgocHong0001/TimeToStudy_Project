@@ -1,49 +1,82 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import userRoute from './routes/userRoute.js';
+
 import mongoose from 'mongoose';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname, join } from 'path';
 import ICAL from 'ical.js';
 
+// Routes
+import userRoute from './routes/userRoute.js';
+import adminRoute from './routes/adminRoute.js'; // <-- New import
+
+// Setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '.env') });
 
+dotenv.config({ path: join(__dirname, '.env') });
 
 const DB_PORT = process.env.PORT || 5000;
 const DB_MONGODB = process.env.MONGO_URI;
 
-console.log("URI from env:", process.env.MONGO_URI); // Controll that the URI works.
+console.log("URI from env:", process.env.MONGO_URI);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
+// Routes
+app.use('/api/users', userRoute);
+app.use('/api/admin', adminRoute); 
+
+// MongoDB Connection
+
 console.log("Trying to connect to MongoDB...");
 mongoose.connect(DB_MONGODB)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .then(() => {
+    console.log('MongoDB connected');
 
-  console.log("It was called.");
+
 
 app.get('/', (req, res) => {
     res.send("Time To Study");
 });
 
-app.use('/api/users', userRoute);
 
-app.listen(DB_PORT, () => {
+
+
+  app.use('/api/users', userRoute);
+
+console.log("It was called.");
+
+  app.listen(DB_PORT, () => {
+
     console.log(`Server running on http://localhost:${DB_PORT}..`);
 });
+})
+
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
+
+
+app.get('/', (req, res) => {
+  res.send("Time To Study");
+});
+
+
+
 app.use('/schema', express.static(path.join(__dirname, '../schedules')));
 
-
 app.get('/api/ics', (req, res) => {
-  const fileName = req.query.file; 
+  const fileName = req.query.file;
   if (!fileName) {
     return res.status(400).json({ error: 'No file specified' });
   }
@@ -52,6 +85,9 @@ app.get('/api/ics', (req, res) => {
 
   fs.readFile(icsFilePath, 'utf8', (err, data) => {
     if (err) {
+      if (err.code === 'ENOENT') {
+        return res.status(404).json({ error: 'Schedule file not found' });
+      }
       console.error('Error reading ICS file:', err);
       return res.status(500).json({ error: 'Error reading ICS file' });
     }
@@ -96,4 +132,9 @@ app.get('/api/ics', (req, res) => {
     }
   });
 });
+
+// Start server
+/*app.listen(DB_PORT, () => {
+  console.log(`Server running on http://localhost:${DB_PORT}..`);
+});*/
 

@@ -1,11 +1,10 @@
 
   
   .app-container {
-    background-color: #eaeaea; 
+    background-color: hsla(0, 0%, 100%, 0.5); 
     color: black; 
     min-height: 100vh;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   /* Title */
@@ -23,6 +22,21 @@
     margin-bottom: 20px;
     color: black;
   }
+
+  
+/* Container for the StudyTextForm and FileSelector */
+.study-and-file-selector-container {
+  display: flex;
+  justify-content: space-between; /* Space between the two components */
+  gap: 20px; /* Add some spacing between them */
+}
+
+/* Optionally, you can limit the width of the components if needed */
+.study-and-file-selector-container > * {
+  flex: 1; /* Allow both components to take equal width */
+  min-width: 0; /* Prevent overflowing */
+}
+
   
   /* Buttons */
   .load-button, .week-button {
@@ -38,7 +52,8 @@
   }
   
   .load-button:hover, .week-button:hover {
-    background-color: #5a4bcf;
+    background-color: #F39C12;
+    transition: background 0.3s ease;
   }
 
   .error-message {
@@ -50,19 +65,21 @@
   
   /* Table container */
   .table-container {
-    overflow-x: auto;
-    margin-top: 20px;
+    margin-top: 60px; /* Ensure there's space for the fixed buttons */
+    max-height: 80vh; /* Set a max height to prevent it from growing too large */
+    overflow-y: auto; /* Enables scrolling when the table's content exceeds max height */
   }
   
   /* Full table */
   .schedule-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
   }
   
   /* Table Headers */
   .schedule-table th {
-    background-color: #a2a2b5; 
+    background-color: #7ab79b; 
     color: black;
     padding: 10px;
     text-align: center;
@@ -71,7 +88,7 @@
   
   /* Table Cells */
   .schedule-table td {
-    background-color: #d2d2da;
+    background-color: #e9f7fc;
     padding: 10px;
     border: 1px solid #3d3d5c;
     vertical-align: top;
@@ -89,7 +106,7 @@
   
   /* Event Box */
   .event-box {
-    background-color: #9b96c6;
+    background-color: #8ac291;
     color: black;
     border-radius: 8px;
     padding: 8px;
@@ -127,7 +144,7 @@
   
   .red-event {
     color: black;
-    background-color: rgb(170, 97, 97);
+    background-color: rgb(194, 122, 122);
     font-weight: bold;
   }
   
@@ -142,7 +159,7 @@
   .study-planner {
     margin-top: 2rem;
     padding: 2rem;
-    background-color: #d2d2da;
+    background-color: #eeeeee;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -195,21 +212,23 @@
   }
   
   .calculate-button:hover {
-    background-color: #45a049;
+    background-color: #F39C12;
+    transition: background 0.3s ease;
   }
   
   .study-result {
     margin-top: 1rem;
     font-size: 1.2rem;
-    color: darkgreen;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     text-align: center;
+  
   }
 
   .file-selector {
     margin: 1.5rem 0; /* Removed auto centering */
     padding: 1rem 1.5rem;
-    background-color: #d2d2da;
+    background-color: #eeeeee;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;
@@ -217,7 +236,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
   }
   
   .file-selector label {
@@ -239,11 +258,7 @@
 
   
   
-
-
-
-  /* Your existing styles remain unchanged above */
-/* Hide or show based on screen size */
+/* show based on screen size */
 @media (max-width: 768px) {
     .desktop-only {
       display: none;
