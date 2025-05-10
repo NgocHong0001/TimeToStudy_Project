@@ -2,7 +2,7 @@ import express from 'express';
 import { registerUser, getUserProfile, changePassword } from '../controllers/userController.js'; 
 import { protect } from '../middleware/auth.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
-import { savePlanner, usersPlanner } from '../controllers/plannerController.js'; // Import the planner controller
+import { savePlanner, usersPlanner, deletePlanner } from '../controllers/plannerController.js'; // Import the planner controller
 
 const router = express.Router();
 
@@ -11,9 +11,13 @@ router.get('/ping', (req, res) => {
     res.json({ message: 'Router is alive!' });
   });
   
+  // Delee study pla
+  router.delete('/delete-planner', protect, deletePlanner);
 
 // Register new students
 router.post('/register', registerUser);
+
+
 
 // Get user profile. Protect checks if the user is logged in and has 
 // a valid token.

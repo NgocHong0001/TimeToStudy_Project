@@ -8,11 +8,14 @@ import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/schedule
 import '../styles/schedules.css';
 import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
 
+
 const hours = Array.from({ length: 18 }, (_, i) => i + 6);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 function School_sch() {
   // State
+  const [planners, setPlanners] = useState([]);
+  const [plannerId, setPlannerId] = useState('');
   const [school, setSchool] = useState('');
   const [program, setProgram] = useState('');
   const [year, setYear] = useState('');
@@ -122,8 +125,6 @@ function School_sch() {
         let endHour = currentHour + studyHours;
         const endTimeStr = `${String(endHour).padStart(2, '0')}:00`;
 
-
-
         if (endHour > 22) {
           break;
         }
@@ -131,8 +132,6 @@ function School_sch() {
         //Trying something out here. Frida
         /*const startDateTime = new Date(`${dateStr}T${startTimeStr}:00`);
         const endDateTime = new Date(`${dateStr}T${endTimeStr}:00`);*/
-
-
 
         const studyEvent = {
           summary: `Study Session (${studyType})`,
@@ -194,11 +193,38 @@ function School_sch() {
       }
   
       const data = await response.json();
+      alert('Study plan saved successfully!');
       console.log('Planner data saved successfully:', data);
     } catch (error) {
       console.error('Error saving planner data:', error);
     }
   }
+
+  const handleDeletePlanner = async (plannerId, e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found.');
+      return;
+    }
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/delete-planner?plannerId=${plannerId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}` // Include the token in the request headers
+        },
+        body: JSON.stringify({ plannerId }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete planner data');
+      }
+      const data = await response.json();
+      alert('Study plan deleted successfully!');
+      console.log('Planner data deleted successfully:', data);
+    } catch (error) {
+      console.error('Error deleting planner data:', error);
+  }
+}
 
   useEffect(() => {
     const fetchPlanner = async () => {
@@ -222,6 +248,8 @@ function School_sch() {
       }
       const data = await response.json();
       setStudyEvents(Array.isArray(data.studyEvents) ? data.studyEvents : []);
+
+       setPlannerId(data._id);
 
       console.log('Fetched planner data:', data);
     } catch (error) {
@@ -250,6 +278,11 @@ function School_sch() {
         }}
       />
        <button className="save-button" onClick={handleSavePlanner}>Save Study Plan</button>
+       {plannerId && (
+        <button className="delete-button" onClick={(e) => handleDeletePlanner(plannerId, e)}>Delete
+  </button>
+)}
+
      
       {/* Container for both StudyTextForm and FileSelector */}
       <div className="study-and-file-selector-container">
