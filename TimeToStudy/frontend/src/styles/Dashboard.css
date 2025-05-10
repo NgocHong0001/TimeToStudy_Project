@@ -38,3 +38,70 @@ h1 {
   margin-bottom: 1rem;
   box-sizing: border-box;
 }
+
+
+.study-planner-notice {
+  background: linear-gradient(135deg, #80b882, #1a9521);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  max-width: 250px;
+  margin: 20px auto;
+}
+
+.study-planner-notice h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.study-planner-notice p {
+  margin: 5px 0;
+}
+
+
+
+.study-planner-notice p {
+  font-size: 1rem;
+}
+
+.study-planner-notice .notice-title {
+  font-weight: bold;
+}
+
+.study-planner-notice .notice-detail {
+  font-style: italic;
+}
+
+/* Style for the delete button */
+.delete-btn {
+  background-color: darkgreen; 
+  color: white; 
+  font-size: 16px; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background-color: green; 
+  transform: scale(1.05); 
+}
+
+.delete-btn:focus {
+  outline: none; 
+}
+
+.delete-btn:active {
+  background-color: #b71c1c;
+  transform: scale(0.98);
+}

@@ -6,6 +6,7 @@ export default function Dashboard() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [today, setToday] = useState("");
+  const [studyPlanner, setStudyPlanner] = useState(null);  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,7 +20,7 @@ export default function Dashboard() {
       }
     }
 
-    // Get today's date"
+    // Get today's date
     const date = new Date();
     const formatted = date.toLocaleDateString("en-GB", {
       weekday: "short",
@@ -28,9 +29,42 @@ export default function Dashboard() {
       year: "numeric"
     });
     setToday(formatted);
+
+  
+    const fetchStudyPlanner = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("No token found.");
+        return;
+      }
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch study planner data');
+        }
+        const data = await response.json();
+        setStudyPlanner(data);  
+        console.log('Fetched study planner data:', data);
+      } catch (error) {
+        console.error('Error fetching study planner data:', error);
+      }
+    };
+
+    fetchStudyPlanner();
   }, []);
 
- 
+  // Handle the deletion of the study planner notice
+  const handleDeleteNotice = () => {
+    setStudyPlanner(null);  
+  };
+
   return (
     <section className="dashboard-wrapper">
       <h1>Welcome {firstname} {lastname}!</h1>
@@ -38,17 +72,23 @@ export default function Dashboard() {
       <div className="Date-table">
         <p className="Date-text">{today}</p>
 
-        <div className="Notice-table">
-          <p>Notis</p>
-        </div>
+        {/* Only display the study planner section */}
+        {studyPlanner ? (
+          <div className="study-planner-notice">
+            <h3>Study Planner:</h3>
+            <p>Study Type: {studyPlanner.studyType}</p>
+            <p>Study Pace: {studyPlanner.studyPace}</p>
+            <p>Start Date: {new Date(studyPlanner.startDate).toLocaleDateString()}</p>
+            <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
+            <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
 
-        <div className="Notice-table">
-          <p>Notis</p>
-        </div>
-        
+            {/* Delete button */}
+            <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+          </div>
+        ) : (
+          <p>No study planner data found.</p>
+        )}
       </div>
-
-      
     </section>
   );
 }

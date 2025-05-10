@@ -6,7 +6,7 @@ import { savePlanner, usersPlanner } from '../controllers/plannerController.js';
 
 const router = express.Router();
 
-//Debug ping route to check if the router is working
+//Debug ping route to check if the router is workin
 router.get('/ping', (req, res) => {
     res.json({ message: 'Router is alive!' });
   });
