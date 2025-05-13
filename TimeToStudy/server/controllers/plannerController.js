@@ -1,6 +1,29 @@
 // controllers/plannerController.js
 import Planner from '../models/plannerModel.js';
 
+// PATCH /api/users/clear-study-events
+export const deletePlanner = async (req, res) => {
+   const plannerId = req.query.plannerId; // ✅ ändrat från req.body
+   console.log("🧾 plannerId från query:", plannerId);
+   console.log("🧾 userId från token:", req.user._id);
+
+  try {
+    console.log("UserID from token:", req.user._id);
+   
+    const planner = await Planner.findOneAndDelete({ _id: plannerId, userId: req.user._id });
+
+    if (!planner) {
+      return res.status(404).json({ message: 'Planner not found or unauthorized' });
+    }
+
+    res.status(200).json({ message: 'Study events cleared successfully' });
+  } catch (err) {
+    console.error('Error clearing study events:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
 export const usersPlanner = async (req, res) => {
   try {
     const userId = req.user._id; // Comes from protect middleware token

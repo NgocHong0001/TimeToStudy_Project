@@ -22,7 +22,7 @@ export default function Login() {
       // If credentials match, login without backend
       if (username === allowedAdminUsername && password === allowedAdminPassword) {
         const mockToken = 'mock-admin-token'; // Mock token for admin
-        localStorage.setItem('token', mockToken); 
+        localStorage.setItem('accessToken', mockToken); //Changed from 'token' to 'accessToken'. 
         localStorage.setItem('isAdmin', 'true'); // Set isAdmin to true for admin
 
         navigate('/dashboard', { replace: true });
@@ -39,21 +39,23 @@ export default function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Include cookies in the request
         body: JSON.stringify({ username, password, role: 'user' }),
       });
 
       const data = await response.json();
-      console.log(data); // see success message from backend
-
+      console.log('🎟️ accessToken:', data.accessToken);
+  
       if (response.ok) {
-        localStorage.setItem('token', data.token); // save token to local storage
+        //token is saved and sent to the backend.
+        localStorage.setItem('accessToken', data.accessToken); // save token to local storage
+        console.log('✅ Token saved, navigating...');
         localStorage.setItem('isAdmin', 'false'); // set isAdmin to false for regular users
         alert("You're logged in!");
         navigate('/dashboard', { replace: true });
       } else {
         alert(data.message || "Login failed");
       }
-
     } catch (err) {
       console.error('Error:', err);
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EventBox = ({ event }) => {
-  const isImportant = ['assignment', 'test', 'seminar', 're-seminar', 'examination', 'exam', 're-exam']
+  const isImportant = ['assignment', 'test', 'seminar', 're-seminar', 'examination', 'exam', 're-exam', "seminarium"]
     .some(keyword => event.summary.toLowerCase().includes(keyword));
   const isStudy = event.isStudySession;
 

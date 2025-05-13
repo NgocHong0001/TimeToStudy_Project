@@ -215,6 +215,44 @@
     background-color: #F39C12;
     transition: background 0.3s ease;
   }
+
+    .delete-button {
+    margin-top: 1rem;
+    background-color: rgb(179, 30, 30);
+    color: white;
+    font-weight: bold;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make the button span the full width */
+  }
+  
+  .delete-button:hover {
+    background-color: #F39C12;
+    transition: background 0.3s ease;
+  }
+
+  .save-button {
+    margin-top: 1rem;
+    background-color: rgb(42, 67, 158);
+    color: white;
+    font-weight: bold;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make the button span the full width */
+  }
+  
+  .save-button:hover {
+    background-color: #F39C12;
+    transition: background 0.3s ease;
+  }
   
   .study-result {
     margin-top: 1rem;

@@ -7,12 +7,16 @@ import StudyTextForm from '../components/StudyTextForm';
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedules.css';
 import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
+import authorizedFetch from '../utils/authFetch';
 
-const hours = Array.from({ length: 13 }, (_, i) => i + 8);
+
+const hours = Array.from({ length: 18 }, (_, i) => i + 6);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 function School_sch() {
   // State
+  const [planners, setPlanners] = useState([]);
+  const [plannerId, setPlannerId] = useState('');
   const [school, setSchool] = useState('');
   const [program, setProgram] = useState('');
   const [year, setYear] = useState('');
@@ -29,25 +33,29 @@ function School_sch() {
   const [endDateTime, setEndDateTime] = useState(''); // Added endDateTime. Frida
   const [recommendedHours, setRecommendedHours] = useState(null);
 
-
-  
-
+  // Get ICS data
   // Get ICS data
   const handleGetICSData = async (file) => {
     try {
-      const response = await fetch(`/api/ics?file=${file}`);
-  
+      const response = await authorizedFetch(`/api/ics?file=${file}`);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.error || 'Failed to load schedule. Please check your selection.');
+        if (response.status === 404) {
+          alert('Sorry, this schedule does not exist.');
+        } else {
+          alert('Sorry this schedule has not been added yet.');
+        }
+        setEvents([]); // Clear any old events
         return;
       }
-  
+
       const data = await response.json();
       setEvents(data);
     } catch (error) {
       console.error('Error fetching .ics data:', error);
-      alert('An unexpected error occurred while loading your schedule.');
+      alert('Error fetching schedule data.');
+      setEvents([]);
+
     }
   };
   
@@ -117,18 +125,22 @@ function School_sch() {
         const startTimeStr = `${String(currentHour).padStart(2, '0')}:00`;
         let endHour = currentHour + studyHours;
         const endTimeStr = `${String(endHour).padStart(2, '0')}:00`;
-  
-        if (endHour > 22) break; //Frida got break in curly bracet {break}
-  
+
+        if (endHour > 22) {
+          break;
+        }
+
+        //Trying something out here. Frida
+        /*const startDateTime = new Date(`${dateStr}T${startTimeStr}:00`);
+        const endDateTime = new Date(`${dateStr}T${endTimeStr}:00`);*/
+
         const studyEvent = {
           summary: `Study Session (${studyType})`,
-          location: 'Home or Library',
+          location: '📍 Home or Library',
           startDate: sessionDate.toISOString().split('T')[0],
           endDate: sessionDate.toISOString().split('T')[0],
           startTime: startTimeStr,
           endTime: endTimeStr,
-          //startDateTime, // Added startDateTime
-          //endDateTime, // Added endDateTimes
           isStudySession: true
         };
   
@@ -159,7 +171,7 @@ function School_sch() {
       }
 }
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/save-planner`, {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/save-planner`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -182,15 +194,42 @@ function School_sch() {
       }
   
       const data = await response.json();
+      alert('Study plan saved successfully!');
       console.log('Planner data saved successfully:', data);
     } catch (error) {
       console.error('Error saving planner data:', error);
     }
   }
 
+  const handleDeletePlanner = async (plannerId, e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No token found.');
+      return;
+    }
+    try {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/delete-planner?plannerId=${plannerId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}` // Include the token in the request headers
+        },
+        body: JSON.stringify({ plannerId }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete planner data');
+      }
+      const data = await response.json();
+      alert('Study plan deleted successfully!');
+      console.log('Planner data deleted successfully:', data);
+    } catch (error) {
+      console.error('Error deleting planner data:', error);
+  }
+}
+
   useEffect(() => {
     const fetchPlanner = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     console.log("Token: ", token);
     if (!token) {
       console.error("No token found.");
@@ -198,18 +237,28 @@ function School_sch() {
     }
     
     try { 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
       });
+       if (response.status === 404) {
+        console.warn("No planner data found for this user.");
+        return;
+    }
+      if (response.status === 401) {
+        console.error("Unauthorized access. Please log in again.");
+        return;
+      }
       if (!response.ok) {
         throw new Error('Failed to fetch planner data');  
       }
       const data = await response.json();
       setStudyEvents(Array.isArray(data.studyEvents) ? data.studyEvents : []);
+
+       setPlannerId(data._id);
 
       console.log('Fetched planner data:', data);
     } catch (error) {
@@ -238,6 +287,11 @@ function School_sch() {
         }}
       />
        <button className="save-button" onClick={handleSavePlanner}>Save Study Plan</button>
+       {plannerId && (
+        <button className="delete-button" onClick={(e) => handleDeletePlanner(plannerId, e)}>Delete
+  </button>
+)}
+
      
       {/* Container for both StudyTextForm and FileSelector */}
       <div className="study-and-file-selector-container">
