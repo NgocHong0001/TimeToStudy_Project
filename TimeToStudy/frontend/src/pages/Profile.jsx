@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
+import authorizedFetch from '../utils/authFetch';
 
 export default function Profile() {
   const [username, setUsername] = useState('');
@@ -26,10 +27,10 @@ export default function Profile() {
 
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`${apiUrl}/profile`, {
+        const response = await authorizedFetch(`${apiUrl}/profile`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the token in the request headers
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // Include the token in the request headers
           },
         });
         const data = await response.json();

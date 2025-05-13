@@ -7,6 +7,7 @@ import StudyTextForm from '../components/StudyTextForm';
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedules.css';
 import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
+import authorizedFetch from '../utils/authFetch';
 
 
 const hours = Array.from({ length: 18 }, (_, i) => i + 6);
@@ -36,7 +37,7 @@ function School_sch() {
   // Get ICS data
   const handleGetICSData = async (file) => {
     try {
-      const response = await fetch(`/api/ics?file=${file}`);
+      const response = await authorizedFetch(`/api/ics?file=${file}`);
 
       if (!response.ok) {
         if (response.status === 404) {
@@ -170,7 +171,7 @@ function School_sch() {
       }
 }
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/save-planner`, {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/save-planner`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -208,7 +209,7 @@ function School_sch() {
       return;
     }
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/delete-planner?plannerId=${plannerId}`, {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/delete-planner?plannerId=${plannerId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}` // Include the token in the request headers
@@ -236,7 +237,7 @@ function School_sch() {
     }
     
     try { 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
+      const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

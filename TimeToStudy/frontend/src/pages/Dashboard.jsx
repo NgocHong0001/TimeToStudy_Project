@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import authorizedFetch from '../utils/authFetch';
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
@@ -9,7 +10,7 @@ export default function Dashboard() {
   const [studyPlanner, setStudyPlanner] = useState(null);  
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       try {
         const decoded = jwtDecode(token);
@@ -31,29 +32,20 @@ export default function Dashboard() {
     setToday(formatted);
 
   
-    const fetchStudyPlanner = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found.");
-        return;
-      }
 
+    const fetchStudyPlanner = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-        });
+        const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/users-planner`);
+
         if (!response.ok) {
-          throw new Error('Failed to fetch study planner data');
+          throw new Error("Failed to fetch study planner data");
         }
+
         const data = await response.json();
-        setStudyPlanner(data);  
-        console.log('Fetched study planner data:', data);
+        setStudyPlanner(data);
+        console.log("Fetched study planner data:", data);
       } catch (error) {
-        console.error('Error fetching study planner data:', error);
+        console.error("Error fetching study planner data:", error);
       }
     };
 

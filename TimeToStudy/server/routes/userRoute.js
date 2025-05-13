@@ -3,6 +3,7 @@ import { registerUser, getUserProfile, changePassword } from '../controllers/use
 import { protect } from '../middleware/auth.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
 import { savePlanner, usersPlanner, deletePlanner } from '../controllers/plannerController.js'; // Import the planner controller
+import { refreshAccessToken } from '../controllers/tokenController.js'; // Import the refresh token controller
 
 const router = express.Router();
 
@@ -34,5 +35,7 @@ router.post('/login', loginUser);
 router.put('/save-planner', protect, savePlanner);
 
 router.get('/users-planner', protect, usersPlanner);
+
+router.post('/refresh-token', refreshAccessToken)
 
 export default router;
