@@ -1,11 +1,11 @@
 .auth-form {
-  max-width: 400px;
-  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
   padding: 2rem;
   background-color: #eeeeee8f;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  text-align: center;
 }
 
 .auth-form input {
@@ -29,10 +29,9 @@
   background-color: #F39C12;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 1rem auto; /* center horizontally and add spacing below */
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+@media (max-width: 768px) {
+  .auth-form {
+    width: 100%;
+    margin-top: -20%;
+  }
 }

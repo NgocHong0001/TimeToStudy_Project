@@ -62,7 +62,7 @@ export default function Login() {
   return (
     <div className="login-form">
       <form onSubmit={handleSubmit}>
-        <img src="src/assets/login-person.png" alt="Logo" className="logo" />
+        <img src="src/assets/login-person.png" alt="Logo" className="logoin" />
         <h2>{isAdmin ? 'Admin Login' : 'User Login'}</h2>
         <input
           type="text"

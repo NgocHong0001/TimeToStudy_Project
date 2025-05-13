@@ -12,8 +12,8 @@ body {
 .layout {
   display: grid;
   height: 100vh;
-  grid-template-rows: 0.15fr 1fr 0.1fr;
-  grid-template-columns: 3fr 1fr 0.1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 1fr 0.1fr;
   grid-template-areas: 
     "header header navbar"
     "main main navbar"
@@ -25,15 +25,16 @@ body {
   display: flex;
   background-color: #104d27d2;
   grid-area: header;
-  position: relative;
-  z-index: 1; /* Ensure header is above other elements */
+  position: fixed;
+  z-index: 2; /* Ensure header is above other elements */
   padding-left: 1rem; /*moving the title+logo*/;
+  width: 100%;
 }
 
 .title {
   display: flex;
   align-items: center;
-  gap: 0rem; /* space between logo and title */
+  text-decoration: none;
 }
 
 .logo {
@@ -123,15 +124,15 @@ body {
   top: 0;
   right: -110%;  /* Hidden by default */
   width: 100%;
-  background-color: #104d27a1;
+  background-color: #104d2700; /*transp- solution DONT start color!*/
   padding: 2rem;
   transition: right 0.8s ease;
-  z-index: 1; /* Ensure slide-out is above other elements */
+  z-index: 3; /* Ensure slide-out is above other elements */
   box-sizing: border-box; /* Include padding in width calculation */
 }
 
 #menu-slideout.open {
-  right: 4%;
+  right: 7%;
 }
 
 .menu-links {
@@ -164,21 +165,17 @@ body {
   flex-direction: column;
   grid-area: main;
   padding: 2rem;
+  padding-top: 12vh; /* space for fixed header hero paper letss fix this in @media for big & small*/
 }
 
 /* The main layout is a flex container that allows for a flexible layout of its children like home, about login etc*/
 .content {
   flex: 1;
-  padding: 2rem;
-}
-
-.page {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 800px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
 }
 
 .footer {
@@ -188,108 +185,108 @@ body {
   padding: 1rem;
   font-size: 0.8rem;
   grid-area: footer;
+  ;
 }
 
-
-/* Home/Hero section styles */
-
-.hero-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60vh;
-  background-image: url('/src/assets/pexels-pixabay-159866.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; /* Ensures the image covers the entire section */
-  z-index: -1; /* Ensure the hero section is behind other elements */
-  overflow: hidden;
-}
-
-.hero-paper {
-  margin-top: 40vh; /* pulls up slightly to overlap the book image */
-  background: url('/src/assets/white-paper-texture.jpg') center/cover no-repeat;
-  padding: 2rem;
-  max-width: 700px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  z-index: 1;
-  position: relative;
-}
-
-.hero-boxes {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 5rem;
-  gap: 1.5rem;
-  flex-direction: column;
-}
-
-.hero-box {
-  display: flex;
-  align-items: center;
-  background-color: #e6e2dc;
-  padding:2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 90%;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.hero-box img {
-  width: 15%;
-}
-
-.hero-box p {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.hero-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-actual-btn {
-  background: #104d27;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;;
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease;
-  font-family: 'Abhaya Libre', sans-serif;
-}
-
-.hero-actual-btn:hover {
-  background: rgb(243, 156, 18);
-}
-
-/*Responsiv*/
-@media (max-width: 1024px) {
-  .hero-paper {
-    margin-top: 40vh;
-  }
-}
-
+/*RESPONSIV*/
 @media (max-width: 768px) {
-  .hero-paper {
-    margin-top: 40vh;
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "navbar"
+      "main"
+      "footer";
   }
+
+  .header {
+    position: relative;
+    width: 100%;
+    z-index: 2; /* Ensure header is above other elements */
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    grid-area: header;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .right-side-navbar {
+    position: relative;
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    grid-area: navbar;
+    box-sizing: border-box;
+    padding: 0;
+    background-color: #104d27d2;
+  }
+
+  .navbar-links {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+   .navbar-links li a {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar-links li a img {
+    width: 1.5rem;
+  }
+
+  .toggle-btn {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 5;
+    position: absolute; /* Position it relative to the navbar absolout*/
+    padding: 0.5rem; /* Add padding so the hover area includes all spans */
+    left: 1rem; /* Align to the right */
+    margin: 0;
+  }
+
+  .toggle-btn span {
+    width: 25px;
+    height: 3px;
+    margin: 10%;
+  }
+
+  #menu-slideout {
+    position: absolute;
+    top: 100%; 
+    right: 100%;
+    width: 100%;
+    background-color: #104d27d2;
+    z-index: 4;
+    box-sizing: border-box;
+    padding: 0;
+  }
+  
+  #menu-slideout.open {
+    right: 0;
+    /*display: block; /* Show when open */
+    padding: 0;
+  }
+
+  .menu-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .menu-links li {
+    margin: 1rem;
+  }
+
+  .menu-links a {
+    font-size: 1rem;
+  }
+
 }

@@ -1,6 +1,7 @@
 //Hero Page to navigate further into the app
 import { Link, Outlet } from 'react-router-dom';
 import './styles/App.css';
+import './styles/Home.css';
 import { useState } from 'react';
 
 
@@ -11,10 +12,10 @@ export default function Layout() {
     <div>
       <div className="layout">
         <header className="header">
-        <div className="title">
+        <Link to="/" className="title">
           <img src="src/assets/logo (1).png" alt="Logo" className="logo" />
           <h1>Time2Study</h1>
-        </div>
+        </Link>
         </header>
 
         <nav className="right-side-navbar">
@@ -28,6 +29,14 @@ export default function Layout() {
             <li><Link to="/"><img src="src/assets/home.png" alt="log-in"></img><span>Home</span></Link></li>
             <li><Link to="/about"><img src="src/assets/about-us.png" alt="about us"></img><span>About Us</span></Link></li>
           </ul>
+
+          {/* slide out menu*/} 
+          <div id="menu-slideout" className={menuOpen ? 'open' : ''}>
+            <ul className="menu-links">
+              <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
+              <li><Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
+            </ul>
+          </div>
         </nav>
 
         <section className="main-layout">
@@ -43,13 +52,6 @@ export default function Layout() {
         </footer>
       </div>
 
-      {/* slide out menu*/} 
-      <div id="menu-slideout" className={menuOpen ? 'open' : ''}>
-        <ul className="menu-links">
-          <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
-          <li><Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
-        </ul>
-      </div>
     </div>
   );
 }

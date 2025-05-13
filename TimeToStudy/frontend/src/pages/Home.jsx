@@ -8,8 +8,7 @@ export default function Home() {
       </div>
       
 
-      <div className="hero-paper" >
-        {/*<img src="src/assets/white-paper-texture.jpg" alt="paper-texture" />*/}
+      <div className="hero-paper" data-aos="zoom-in" data-aos-duration="600">
         <div className="hero-text">
           <h2>"Crush Your Deadlines with Confidence!"</h2>
           <p>Time2Study helps you plan your study hours perfectly — no more stressing over schedules. Balance your studies, ace your goals, and still have time for life. We've got your back!</p>

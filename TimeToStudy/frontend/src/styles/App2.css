@@ -66,3 +66,41 @@
   text-align: center;
   padding: 1rem;
 }
+
+@media (max-width: 768px) {
+  .layout2 {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "navbar"
+      "main"
+      "footer"; /* stack all areas */
+  }
+
+  .left-side-navbar {
+    position: static; /*flows w/ layout*/
+    width: 100%;
+    height: auto; /* allow auto height */
+    flex-direction: row;
+    align-items: center; /* vertically center icons */
+    padding: 0.5rem 0; /* adjust padding */
+  }
+
+  .left-side-navbar ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around; /* distribute items evenly */
+  }
+
+  .left-side-navbar li {
+    margin: 0; /* remove large margin between items */
+  }
+
+  .sidebar-link {
+    font-size: 0.9rem;
+  }
+
+  .nav-icon {
+    width: 24px; /* smaller on mobile */
+  }
+}
