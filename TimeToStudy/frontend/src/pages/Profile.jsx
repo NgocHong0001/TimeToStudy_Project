@@ -61,27 +61,52 @@ export default function Profile() {
     }
   };
 
-  let changePassword = async () => {
+  let changePassword = async (e) => {
+    e.preventDefault(); //Web reader plz don't do default action of the form. Let me handle it.
     const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
-    console.log("Testing if API URL works: ", apiUrl);
+    console.log("Testing if API URL works: ", apiUrl);   
+
     if (newPassword !== confirmPassword) {
-      alert("The new passwords do not match.");
+      alert("New password and confirm password do not match.");
       return;
     }
-    if (newPassword.length < 6) {
-      alert("The new password must be at least 6 characters long.");
+
+    if (newPassword.length <= 6) {
+      alert("New password must be at least 6 characters long.");
       return;
     }
+
     if (currentPassword === newPassword) {
-      alert("The new password must be different from the current password.");
+      alert("New password cannot be the same as the current password.");
       return;
-    }    
+    }
+
+    if (currentPassword === '') {
+      alert("Current password cannot be empty.");
+      return;
+    }
+
+    if (newPassword === '') {
+      alert("New password cannot be empty.");
+      return;
+    }
+
+    if (confirmPassword === '') {
+      alert("Confirm password cannot be empty.");
+      return;
+    }
+
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+    if (!passwordPattern.test(newPassword)) {
+      alert("Password must be at least 6 characters long and contain at least one letter, one number, and one special character.");
+      return;
+}
 
     try {
-      const response = await fetch(`${apiUrl}/change-password`, {
+      const response = await authorizedFetch(`${apiUrl}/change-password`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the token in the request headers
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // Include the token in the request headers
           'Content-Type': 'application/json',
         },
 
@@ -92,6 +117,10 @@ export default function Profile() {
       console.log(data); // see success message from backend
       if (response.ok) {
         alert('Password changed successfully!');
+         // empty the password fields
+         setCurrentPassword('');
+         setNewPassword('');
+         setConfirmPassword('');
       } else {
         alert(data.message || 'Password change failed');
       }
@@ -99,9 +128,6 @@ export default function Profile() {
       console.error('Error:', err);
     }
   }
-
- 
-
 
   return (
     <div className="profile-page">

@@ -46,7 +46,6 @@ export default function Login() {
       const data = await response.json();
       console.log('🎟️ accessToken:', data.accessToken);
   
-
       if (response.ok) {
         //token is saved and sent to the backend.
         localStorage.setItem('accessToken', data.accessToken); // save token to local storage

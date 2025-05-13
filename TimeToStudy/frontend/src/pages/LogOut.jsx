@@ -5,7 +5,7 @@ export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     //Redirect to the home page after logout
     navigate('/');
   }, []);

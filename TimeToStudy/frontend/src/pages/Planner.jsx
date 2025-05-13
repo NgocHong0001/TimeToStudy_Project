@@ -229,7 +229,7 @@ function School_sch() {
 
   useEffect(() => {
     const fetchPlanner = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     console.log("Token: ", token);
     if (!token) {
       console.error("No token found.");
@@ -244,6 +244,14 @@ function School_sch() {
           'Authorization': `Bearer ${token}`
         },
       });
+       if (response.status === 404) {
+        console.warn("No planner data found for this user.");
+        return;
+    }
+      if (response.status === 401) {
+        console.error("Unauthorized access. Please log in again.");
+        return;
+      }
       if (!response.ok) {
         throw new Error('Failed to fetch planner data');  
       }
