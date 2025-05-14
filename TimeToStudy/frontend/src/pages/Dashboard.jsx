@@ -75,7 +75,10 @@ export default function Dashboard() {
             <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
 
             {/* Delete button */}
-            <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+            <div className="delete-btn-wrapper">
+              <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+            </div>
+            
           </div>
         ) : (
           <p>No study planner data found.</p>

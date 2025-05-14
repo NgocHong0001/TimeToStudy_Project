@@ -8,6 +8,10 @@ const Admin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
+  const [editingUser, setEditingUser] = useState(null);
+  const [formData, setFormData] = useState({ firstname: '', lastname: '', username: '' });
+  const [userToDelete, setUserToDelete] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +32,8 @@ const Admin = () => {
   }, []);
 
   const handleDeleteUser = async (id) => {
+    
+
     try {
       await fetch(`http://localhost:5000/api/admin/delete/${id}`, {
         method: 'DELETE',
@@ -37,9 +43,6 @@ const Admin = () => {
       console.error("Delete failed", err);
     }
   };
-
-  const [editingUser, setEditingUser] = useState(null);
-  const [formData, setFormData] = useState({ firstname: '', lastname: '', username: '' });
 
   const handleEditUser = (user) => {
     setEditingUser(user._id);
@@ -102,7 +105,7 @@ const Admin = () => {
 
       <AdminUserTable
         users={paginatedUsers}
-        onDelete={handleDeleteUser}
+        onDelete={(id) => setUserToDelete(id)}
         onEdit={handleEditUser}
       />
 
@@ -141,6 +144,7 @@ const Admin = () => {
         </button>
       </div>
 
+      {/* Edit Modal */}
       {editingUser && (
         <div className="modal-overlay">
           <div className="modal">
@@ -166,6 +170,27 @@ const Admin = () => {
             <div className="modal-buttons">
               <button onClick={handleSaveEdit}>Save</button>
               <button onClick={() => setEditingUser(null)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {userToDelete && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to remove this user?</p>
+            <div className="modal-buttons">
+              <button
+                onClick={() => {
+                  handleDeleteUser(userToDelete);
+                  setUserToDelete(null);
+                }}
+              >
+                Confirm
+              </button>
+              <button onClick={() => setUserToDelete(null)}>Cancel</button>
             </div>
           </div>
         </div>

@@ -162,33 +162,31 @@ td button:nth-child(2):hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-
-  tr {
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 1rem;
+  .admin-user-table {
+    max-width: 100%;
+    font-size: 0.85rem;
   }
 
   th, td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
+    padding: 0.5rem;
   }
 
-  th::before, td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 1rem;
-    width: 45%;
-    text-align: left;
-    font-weight: bold;
+  .table-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .table-controls input[type="text"] {
+    width: 80%;
   }
 
   td button {
-    margin-top: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  td button:first-child {
+    margin-bottom: 0.5rem;
   }
 }

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import StudyPlanner from '../components/StudyPlanner';  
 import FileSelector from '../components/FileSelector'; //This files works as expected, but the system thinks you have type error.
+import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
+import authorizedFetch from '../utils/authFetch';
+import { startPlannerTour } from '../utils/plannerHelpTour';
 import ScheduleTable from '../components/ScheduleTable';
 import MobileSchedule from '../components/MobileSchedule';
 import StudyTextForm from '../components/StudyTextForm';
 import { getStartOfWeek, getDatesOfWeek, getWeekNumber } from '../utils/scheduleUtils'; 
 import '../styles/schedules.css';
-import { jwtDecode } from 'jwt-decode'; // Import jwt_decode to decode the JWT token
-import authorizedFetch from '../utils/authFetch';
-
 
 const hours = Array.from({ length: 18 }, (_, i) => i + 6);
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -108,8 +108,6 @@ function School_sch() {
     const totalAvailableDays = availableDates.length;
     const hoursPerDay = Math.min(12, Math.ceil(totalStudyHours / totalAvailableDays));
 
-
-  
     const newStudyEvents = [];
   
     for (let i = 0; i < totalAvailableDays; i++) {
@@ -129,10 +127,6 @@ function School_sch() {
         if (endHour > 22) {
           break;
         }
-
-        //Trying something out here. Frida
-        /*const startDateTime = new Date(`${dateStr}T${startTimeStr}:00`);
-        const endDateTime = new Date(`${dateStr}T${endTimeStr}:00`);*/
 
         const studyEvent = {
           summary: `Study Session (${studyType})`,
@@ -268,6 +262,12 @@ function School_sch() {
   fetchPlanner();
 }, []);
 
+useEffect(() => {
+    window.addEventListener('start-planner-tour', startPlannerTour);
+    return () => window.removeEventListener('start-planner-tour', startPlannerTour);
+  }, []);
+
+
   return (
     <div className="app-container">
       <h1 className="app-title"> My Schedule</h1>
@@ -308,10 +308,9 @@ function School_sch() {
     }}/>{/* Study Text Form */} 
     <StudyTextForm /> 
 
- 
-</div>
 
-      
+</div>
+   
       {/* Week Navigation */}
       <div className="month-week">
         {currentWeekStart.toLocaleString('default', { month: 'long' })} {currentWeekStart.getFullYear()} — Week {getWeekNumber(currentWeekStart)}

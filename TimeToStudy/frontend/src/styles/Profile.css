@@ -35,3 +35,11 @@
   .profile-page button:hover {
     background-color: #14472d;
   }
+
+
+  @media (max-width: 768px) {
+    .profile-page {
+      padding: 5rem 2rem;
+    }
+    
+  }

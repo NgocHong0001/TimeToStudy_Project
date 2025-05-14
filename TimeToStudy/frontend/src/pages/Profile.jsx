@@ -139,7 +139,7 @@ export default function Profile() {
         <p><strong>Email:</strong> {email}</p>
         
 
-        <p>Password</p>
+        <p>Change Password</p>
         <form onSubmit={changePassword}>
         <input
           type="password"
@@ -149,7 +149,7 @@ export default function Profile() {
           name="currentPassword"
           required
         />  
-        <p>New Password</p>
+       
         <input
           type="password"
           placeholder="New Password"
@@ -158,7 +158,6 @@ export default function Profile() {
           name="newPassword"
           required
         /> 
-        <p>Re-enter New Password</p>
         <input
           type="password"
           placeholder="Re-enter New Password"

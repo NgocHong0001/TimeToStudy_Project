@@ -54,6 +54,10 @@
   margin: 1.5rem 0;
 }
 
+.help-icon-wrapper {
+  position: relative;
+}
+
 .content2 {
   grid-area: main;
   padding: 2rem;
@@ -79,7 +83,7 @@
   .left-side-navbar {
     position: static; /*flows w/ layout*/
     width: 100%;
-    height: auto; /* allow auto height */
+    height: 4rem;
     flex-direction: row;
     align-items: center; /* vertically center icons */
     padding: 0.5rem 0; /* adjust padding */
@@ -102,5 +106,10 @@
 
   .nav-icon {
     width: 24px; /* smaller on mobile */
+  }
+  
+  .content2 {
+    padding: auto; /* adjust padding for mobile */
+    margin: auto; /* add margin for spacing */
   }
 }

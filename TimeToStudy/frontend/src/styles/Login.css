@@ -1,12 +1,12 @@
 .login-form {
-  padding: 4% 10%; 
+  padding: 2% 7%; 
   background-color: #eeeeee8f;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .login-form img.logoin {
-  width: 80%;
+  width: 75%;
 }
 
 form {
@@ -58,12 +58,16 @@ h2 {
 @media (max-width: 768px) {
   .login-form {
     max-width: 80%;
-    padding: 3rem 1rem 1rem;
-    margin-top: -30%;
+    padding: 3rem 2em 2rem;
+    margin-top: 0%;
   }
 
   .login-form img.logoin {
-    width: 50%;
+    width: 60%;
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
   }
 
 }
