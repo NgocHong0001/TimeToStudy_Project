@@ -11,17 +11,18 @@ export const loginUser = async (req, res) => {
     const match = await user.comparePassword(password);
     if (!match) return res.status(401).json({ message: "Wrong password." });
 
-    console.log("✅ Generating accessToken...");
+    console.log("Generating accessToken...");
     const accessToken = jwt.sign(
       {
         userId: user._id,
         username: user.username,
         firstname: user.firstname,
         lastname: user.lastname,
-        isAdmin: user.isAdmin
+        isAdmin: user.isAdmin,
+        jti: crypto.randomUUID() // Generate a unique identifier for the token
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '10s' }
+      { expiresIn: '1h' }
     );
 
     console.log("🎟️ Generated accessToken:", accessToken);
@@ -32,23 +33,25 @@ export const loginUser = async (req, res) => {
         username: user.username,
         firstname: user.firstname,
         lastname: user.lastname,
-        isAdmin: user.isAdmin
+        isAdmin: user.isAdmin,
+        jti: crypto.randomUUID() // Generate a unique identifier for the token
       },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     )
-    console.log('🍪 Refresh token cookie sent!');
+    console.log('Refresh token cookie sent!');
 
     //This store the refresh token in the cookie and sends it to the client. Since it is httpOnly, 
-    // t cannot be accessed by JavaScript on the client side.
+    // it cannot be accessed by JavaScript on the client side.
     // This is important for security, as it prevents XSS attacks from stealing the refresh token.
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000 // 1 day
     });
 
+    //For Postman
     res.status(200).json({
       accessToken,
       username: user.username,

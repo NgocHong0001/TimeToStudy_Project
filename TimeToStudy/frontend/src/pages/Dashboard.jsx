@@ -53,9 +53,32 @@ export default function Dashboard() {
     setStudyPlanner(null);  
   };
 
+
   const toggleEvents = () => {
     setShowEvents(prev => !prev);
   };
+
+  //Only for debug purpose for the refresh token,
+  /*const refreshToken = async () => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/refresh-token`, {
+      method: 'POST', // eller POST beroende på din backend
+      credentials: 'include' // 
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      console.log("Got new access token:", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+    } else {
+      console.warn("Failed to refresh:", data.message);
+    }
+  } catch (err) {
+    console.error("Error refreshing token:", err);
+  }
+};*/
+
+
 
   return (
     <>
@@ -76,6 +99,7 @@ export default function Dashboard() {
   <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
   <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
   <p>Study Events ({studyPlanner.studyEvents.length})</p>
+
 
   {/* Event count + Toggle button grouped */}
   
@@ -108,5 +132,7 @@ export default function Dashboard() {
   </div>
   </section>
   </>
+
   );
 }
+//testign

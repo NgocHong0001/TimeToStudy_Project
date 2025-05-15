@@ -22,7 +22,7 @@ export default function Login() {
       // If credentials match, login without backend
       if (username === allowedAdminUsername && password === allowedAdminPassword) {
         const mockToken = 'mock-admin-token'; // Mock token for admin
-        localStorage.setItem('accessToken', mockToken); //Changed from 'token' to 'accessToken'. 
+        localStorage.setItem('accessToken', mockToken);
         localStorage.setItem('isAdmin', 'true'); // Set isAdmin to true for admin
 
         navigate('/dashboard', { replace: true });
