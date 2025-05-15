@@ -77,7 +77,6 @@ const ScheduleTable = ({ events, studyEvents, currentWeekStart, weekDates, hours
             <tr key={hour}>
               <td className="time-column">{`${hour}:00`}</td>
               {days.map((_, dayIdx) => {
-                // Shift dayIdx: Monday (0) → 1 in JS Date.getDay()
                 const actualDay = (dayIdx + 1) % 7;
 
                 return (
@@ -86,11 +85,8 @@ const ScheduleTable = ({ events, studyEvents, currentWeekStart, weekDates, hours
                       .filter(event => {
                         // Must be in the current week and match day and hour
                         if (!isSameWeek(event.startDate, currentWeekStart)) return false;
-
                         if (getDayOfWeek(event.startDate) !== actualDay) return false;
-
                         if (getHour(event.startTime) !== hour) return false;
-
                         // For study sessions, exclude weekends (dayIdx 0 = Sunday, 6 = Saturday)
                         if (event.isStudySession && (actualDay === 0 || actualDay === 6)) return false;
 

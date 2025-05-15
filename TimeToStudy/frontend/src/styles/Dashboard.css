@@ -36,7 +36,7 @@ h1 {
   opacity: 0;
   transform: scaleY(0.95);
   transition: all 0.4s ease;
-  margin-bottom: 12px; /* space below event list before delete btn */
+  margin-bottom: 12px; 
 }
 
 .study-events-list.open {
@@ -48,10 +48,10 @@ h1 {
 .button-group {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* center buttons horizontally */
-  gap: 2px;             /* spacing between buttons */
-  margin-top: 1rem;      /* some space above wrapper if needed */
-  max-width: 150px;      /* match max-width of toggle-btn */
+  align-items: center;  
+  gap: 2px;             
+  margin-top: 1rem;      
+  max-width: 150px;      
   width: 100%;
   box-sizing: border-box;
 }

@@ -99,18 +99,14 @@ export default function Dashboard() {
     <button className="toggle-btn" onClick={toggleEvents}>
       {showEvents ? "Hide Events" : "Show Events"}
     </button>
-    <button className="delete-btn" onClick={handleDeleteNotice}>
-      Delete Notice
-    </button>
+    <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+    </div>
   </div>
-
-</div>
-
-          ) : (
-            <p>No study planner data found.</p>
-          )}
-        </div>
-      </section>
-    </>
+  ) : (
+  <p>No study planner data found.</p>
+  )}
+  </div>
+  </section>
+  </>
   );
 }
