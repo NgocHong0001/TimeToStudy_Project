@@ -106,7 +106,7 @@
   
   /* Event Box */
   .event-box {
-    background-color: #8ac291;
+    background-color: #b2f2bb;
     color: black;
     border-radius: 8px;
     padding: 8px;
@@ -144,12 +144,12 @@
   
   .red-event {
     color: black;
-    background-color: rgb(194, 122, 122);
+    background-color: rgb(255, 157, 157);
     font-weight: bold;
   }
   
   .green-event {
-    background-color: #b2f2bb; 
+    background-color: rgb(255, 198, 74); 
     color: black; 
     border: 1px solid #5cd65c;
     border-radius: 5px;

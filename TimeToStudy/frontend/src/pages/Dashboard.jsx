@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [lastname, setLastname] = useState("");
   const [today, setToday] = useState("");
   const [studyPlanner, setStudyPlanner] = useState(null);  
+  const [showEvents, setShowEvents] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -21,7 +22,6 @@ export default function Dashboard() {
       }
     }
 
-    // Get today's date
     const date = new Date();
     const formatted = date.toLocaleDateString("en-GB", {
       weekday: "short",
@@ -30,8 +30,6 @@ export default function Dashboard() {
       year: "numeric"
     });
     setToday(formatted);
-
-  
 
     const fetchStudyPlanner = async () => {
       try {
@@ -43,7 +41,6 @@ export default function Dashboard() {
 
         const data = await response.json();
         setStudyPlanner(data);
-        console.log("Fetched study planner data:", data);
       } catch (error) {
         console.error("Error fetching study planner data:", error);
       }
@@ -52,38 +49,68 @@ export default function Dashboard() {
     fetchStudyPlanner();
   }, []);
 
-  // Handle the deletion of the study planner notice
   const handleDeleteNotice = () => {
     setStudyPlanner(null);  
   };
 
+  const toggleEvents = () => {
+    setShowEvents(prev => !prev);
+  };
+
   return (
-    <section className="dashboard-wrapper">
-      <h1>Welcome {firstname} {lastname}!</h1>
+    <>
+      <section className="dashboard-wrapper">
+        <h1>Welcome {firstname} {lastname}!</h1>
+      </section>
 
-      <div className="Date-table">
-        <p className="Date-text">{today}</p>
+      <section className="dashboard-sections">
+        <div className="Date-table">
+          <p className="Date-text">{today}</p>
+        </div>
 
-        {/* Only display the study planner section */}
-        {studyPlanner ? (
-          <div className="study-planner-notice">
-            <h3>Study Planner:</h3>
-            <p>Study Type: {studyPlanner.studyType}</p>
-            <p>Study Pace: {studyPlanner.studyPace}</p>
-            <p>Start Date: {new Date(studyPlanner.startDate).toLocaleDateString()}</p>
-            <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
-            <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
+        <div className="dashboard-box">
+          {studyPlanner ? (
+            <div className="study-planner-notice">
+  <h3>{studyPlanner.studyType}</h3>
+  <p>Pace: {studyPlanner.studyPace} %</p>
+  <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
+  <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
+  <p>Study Events ({studyPlanner.studyEvents.length})</p>
 
-            {/* Delete button */}
-            <div className="delete-btn-wrapper">
-              <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
-            </div>
-            
-          </div>
-        ) : (
-          <p>No study planner data found.</p>
-        )}
-      </div>
-    </section>
+  {/* Event count + Toggle button grouped */}
+  
+
+  {/* Show study events */}
+  <div className={`study-events-list ${showEvents ? "open" : ""}`}>
+    <ul>
+      {studyPlanner.studyEvents.map((event, index) => (
+        <li key={index}>
+          <strong>{event.summary}</strong><br />
+          Location: {event.location}<br />
+          Start: {new Date(event.startDate).toLocaleDateString()} {event.startTime}<br />
+          End: {event.endTime}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  {/* Delete button separated below */}
+    <div className="button-group">
+    <button className="toggle-btn" onClick={toggleEvents}>
+      {showEvents ? "Hide Events" : "Show Events"}
+    </button>
+    <button className="delete-btn" onClick={handleDeleteNotice}>
+      Delete Notice
+    </button>
+  </div>
+
+</div>
+
+          ) : (
+            <p>No study planner data found.</p>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

@@ -5,6 +5,13 @@
   padding: 0; 
 }
 
+.dashboard-box {
+  display:flex;
+  background: #f4c57a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
 h1 {
   font-size: 2.5rem;
   font-weight: bold;
@@ -12,6 +19,72 @@ h1 {
   margin-bottom: 2rem;
   text-align: left;
 }
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 8px; /* add spacing below header */
+}
+
+
+
+.study-events-list {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0.95);
+  transition: all 0.4s ease;
+  margin-bottom: 12px; /* space below event list before delete btn */
+}
+
+.study-events-list.open {
+  max-height: 1000px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* center buttons horizontally */
+  gap: 2px;             /* spacing between buttons */
+  margin-top: 1rem;      /* some space above wrapper if needed */
+  max-width: 150px;      /* match max-width of toggle-btn */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.toggle-btn {
+  flex-shrink: 0;       /* prevent button from shrinking */
+  white-space: nowrap;  /* keep button text in one line */
+  max-width: 150px;     /* optional max width for button */
+  box-sizing: border-box;
+}
+
+
+.toggle-btn {
+  margin-bottom: 5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  margin-left: 4rem;
+
+}
+
+.toggle-btn:hover {
+  background-color: #45a049;
+}
+
+
+
 
 .Date-table {
   background-color: #f4c57a; /* More vibrant like reference */
@@ -29,6 +102,8 @@ h1 {
   margin-top: 0.5rem;
 }
 
+
+
 .study-planner-notice {
   background: #eeeeeee7;
   color: rgb(0, 0, 0);
@@ -41,7 +116,7 @@ h1 {
   width: 100%;
   max-width: 250px;
   box-sizing: border-box;
-  /*margin: 20px auto; somehow place the notice table center might need this when having more notices*/
+  margin: 20px auto; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +131,20 @@ h1 {
   margin: 5px 0;
 
 }
+
+.study-events-list.open {
+  overflow-y: auto;         
+  max-height: 480px;        
+  padding-right: 10px;    
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: scaleY(0.95);
+  transition: all 0.4s ease;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
 
 /* Style for the delete button */
 .delete-btn {
@@ -73,6 +162,8 @@ h1 {
   justify-content: center;
   align-items: center;
   margin: 0.5rem auto 0 auto;
+  margin-top: 2rem;
+  margin-left: 4rem;
 }
 
 .delete-btn:hover {

@@ -24,7 +24,7 @@ function School_sch() {
   const [studyEvents, setStudyEvents] = useState([]); 
   const [selectedFile, setSelectedFile] = useState(''); 
   const [currentWeekStart, setCurrentWeekStart] = useState(getStartOfWeek(new Date()));
-  const [studyType, setStudyType] = useState('exam'); // set it for you
+  const [studyType, setStudyType] = useState(''); // set it for you
   const [studyPace, setStudyPace] = useState(100); // set it for you
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');

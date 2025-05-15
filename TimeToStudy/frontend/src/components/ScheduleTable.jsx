@@ -76,38 +76,51 @@ const ScheduleTable = ({ events, studyEvents, currentWeekStart, weekDates, hours
           {hours.map((hour) => (
             <tr key={hour}>
               <td className="time-column">{`${hour}:00`}</td>
-              {days.map((_, dayIdx) => (
-                <td key={dayIdx} className="event-cell">
-                  {[...events, ...localStudyEvents]
-                    .filter(event =>
-                      isSameWeek(event.startDate, currentWeekStart) &&
-                      getDayOfWeek(event.startDate) === dayIdx &&
-                      getHour(event.startTime) === hour
-                    )
-                    .map((event, idx) => {
-                      const isStudy = event.isStudySession;
-                      const studyIndex = isStudy
-                        ? localStudyEvents.findIndex(e =>
-                            e.startDate === event.startDate &&
-                            e.startTime === event.startTime &&
-                            e.endTime === event.endTime &&
-                            e.summary === event.summary
-                          )
-                        : -1;
+              {days.map((_, dayIdx) => {
+                // Shift dayIdx: Monday (0) → 1 in JS Date.getDay()
+                const actualDay = (dayIdx + 1) % 7;
 
-                      return (
-                        <div
-                          key={idx}
-                          className="event-wrapper"
-                          onClick={() => isStudy && handleStudyEventClick(studyIndex)}
-                          style={{ cursor: isStudy ? 'pointer' : 'default' }}
-                        >
-                          <EventBox event={event} />
-                        </div>
-                      );
-                    })}
-                </td>
-              ))}
+                return (
+                  <td key={dayIdx} className="event-cell">
+                    {[...events, ...localStudyEvents]
+                      .filter(event => {
+                        // Must be in the current week and match day and hour
+                        if (!isSameWeek(event.startDate, currentWeekStart)) return false;
+
+                        if (getDayOfWeek(event.startDate) !== actualDay) return false;
+
+                        if (getHour(event.startTime) !== hour) return false;
+
+                        // For study sessions, exclude weekends (dayIdx 0 = Sunday, 6 = Saturday)
+                        if (event.isStudySession && (actualDay === 0 || actualDay === 6)) return false;
+
+                        return true;
+                      })
+                      .map((event, idx) => {
+                        const isStudy = event.isStudySession;
+                        const studyIndex = isStudy
+                          ? localStudyEvents.findIndex(e =>
+                              e.startDate === event.startDate &&
+                              e.startTime === event.startTime &&
+                              e.endTime === event.endTime &&
+                              e.summary === event.summary
+                            )
+                          : -1;
+
+                        return (
+                          <div
+                            key={idx}
+                            className="event-wrapper"
+                            onClick={() => isStudy && handleStudyEventClick(studyIndex)}
+                            style={{ cursor: isStudy ? 'pointer' : 'default' }}
+                          >
+                            <EventBox event={event} />
+                          </div>
+                        );
+                      })}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
