@@ -13,7 +13,7 @@ export default function Layout2() {
     <div className="layout2">
       <nav className="left-side-navbar">
         <ul>
-          {/* ✅ Admin link only visible for admin users */}
+          {/* Admin link only visible for admin users */}
           {localStorage.getItem('isAdmin') === 'true' && (
             <li>
               <Link to="/admin" className="sidebar-link">
@@ -23,7 +23,7 @@ export default function Layout2() {
             </li>
           )}
 
-          {/* ✅ Profile link only visible for non-admin users */}
+          {/*Profile link only visible for non-admin users */}
           {localStorage.getItem('isAdmin') !== 'true' && (
             <li>
               <Link to="/profile" className="sidebar-link">
