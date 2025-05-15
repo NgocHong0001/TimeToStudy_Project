@@ -31,8 +31,6 @@ export default function Dashboard() {
     });
     setToday(formatted);
 
-  
-
     const fetchStudyPlanner = async () => {
       try {
         const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/users-planner`);
@@ -57,6 +55,27 @@ export default function Dashboard() {
     setStudyPlanner(null);  
   };
 
+  //Only for debug purpose for the refresh token,
+  /*const refreshToken = async () => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/refresh-token`, {
+      method: 'POST', // eller POST beroende på din backend
+      credentials: 'include' // 
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      console.log("Got new access token:", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+    } else {
+      console.warn("Failed to refresh:", data.message);
+    }
+  } catch (err) {
+    console.error("Error refreshing token:", err);
+  }
+};*/
+
+
   return (
     <section className="dashboard-wrapper">
       <h1>Welcome {firstname} {lastname}!</h1>
@@ -76,6 +95,8 @@ export default function Dashboard() {
 
             {/* Delete button */}
             <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+            {/*<button onClick={refreshToken}>Refresh Token</button>*/}
+
           </div>
         ) : (
           <p>No study planner data found.</p>

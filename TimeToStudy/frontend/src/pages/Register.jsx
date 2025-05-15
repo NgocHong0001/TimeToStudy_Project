@@ -16,6 +16,11 @@ export default function RegisterForm() {
     const apiUrl = import.meta.env.VITE_API_URL;
     console.log("Testing if API URL works: ", apiUrl);
 
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+    if (!passwordPattern.test(password)) {
+      alert("Password must be at least 6 characters long and contain at least one letter, one number, and one special character.");
+      return;
+    }
     try {
       const response = await fetch(`${apiUrl}/register`, {
         method: 'POST',

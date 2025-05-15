@@ -10,6 +10,10 @@ export async function refreshAccessToken() {
     }
 
     const data = await response.json();
+    if (!data.accessToken) {
+      console.warn("No access token returned in the refresh response.")
+      return null;
+    }
     localStorage.setItem('accessToken', data.accessToken);
     return data.accessToken;
   } catch (err) {

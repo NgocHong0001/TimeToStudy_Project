@@ -4,6 +4,7 @@ import { protect } from '../middleware/auth.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
 import { savePlanner, usersPlanner, deletePlanner } from '../controllers/plannerController.js'; // Import the planner controller
 import { refreshAccessToken } from '../controllers/tokenController.js'; // Import the refresh token controller
+import { logOutUser } from '../controllers/logOutController.js';
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.post('/register', registerUser);
 router.get('/profile', protect, getUserProfile);
 
 router.post('/change-password', protect, changePassword);
+router.post('/logout', logOutUser)
 
 // Login user
 router.post('/login', loginUser);
