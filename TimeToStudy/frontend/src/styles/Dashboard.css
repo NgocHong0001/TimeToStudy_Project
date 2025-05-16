@@ -21,6 +21,9 @@ h1 {
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Date-text {
@@ -41,7 +44,7 @@ h1 {
   width: 100%;
   max-width: 90%;
   box-sizing: border-box;
-  /*margin: 20px auto; somehow place the notice table center might need this when having more notices*/
+  margin: 20px auto; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +58,6 @@ h1 {
 .study-planner-notice p {
   margin: 5px ;
   
-
 }
 
 .study-events-list {
@@ -78,8 +80,6 @@ h1 {
   opacity: 1;
   transform: scaleY(1);
 }
-
-
 
 .study-events-list.open {
   max-height: 1000px;

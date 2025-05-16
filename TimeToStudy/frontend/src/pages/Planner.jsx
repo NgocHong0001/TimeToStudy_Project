@@ -188,6 +188,7 @@ function School_sch() {
   
       const data = await response.json();
       alert('Study plan saved successfully!');
+      fetchPlanner(); // Re-fetch planner data to update the UI
       console.log('Planner data saved successfully:', data);
     } catch (error) {
       console.error('Error saving planner data:', error);
@@ -215,21 +216,22 @@ function School_sch() {
       const data = await response.json();
       alert('Study plan deleted successfully!');
       console.log('Planner data deleted successfully:', data);
+      setStudyEvents([]); // Clear study events after deletion
+      // Update the UI by re-fetching planner data
+      fetchPlanner();
     } catch (error) {
       console.error('Error deleting planner data:', error);
   }
 }
 
-  useEffect(() => {
-    const fetchPlanner = async () => {
-    const token = localStorage.getItem("accessToken");
-    console.log("Token: ", token);
+  const fetchPlanner = async () => {
+    const token = localStorage.getItem("token"); //original was accessToken but it was not working for refreshing the event update after deleting the planner.
     if (!token) {
       console.error("No token found.");
       return;
     }
-    
-    try { 
+
+    try {
       const response = await authorizedFetch(`${import.meta.env.VITE_API_URL}/users-planner`, {
         method: 'GET',
         headers: {
@@ -237,31 +239,36 @@ function School_sch() {
           'Authorization': `Bearer ${token}`
         },
       });
-       if (response.status === 404) {
+
+      if (response.status === 404) {
         console.warn("No planner data found for this user.");
-        return;
-    }
-      if (response.status === 401) {
-        console.error("Unauthorized access. Please log in again.");
+        setStudyEvents([]);     // Clear study events
+        setPlannerId('');       // Clear plannerId
         return;
       }
+
       if (!response.ok) {
-        throw new Error('Failed to fetch planner data');  
+        throw new Error("Failed to fetch planner data.");
       }
+
       const data = await response.json();
+
+      //Defensive check for both
       setStudyEvents(Array.isArray(data.studyEvents) ? data.studyEvents : []);
+      setPlannerId(data._id || '');
 
-       setPlannerId(data._id);
-
-      console.log('Fetched planner data:', data);
     } catch (error) {
-      console.error('Error fetching planner data:', error);
+      console.error("Error fetching planner data:", error);
+      setStudyEvents([]);
+      setPlannerId('');
     }
   };
-  fetchPlanner();
-}, []);
 
-useEffect(() => {
+  useEffect(() => {
+   fetchPlanner();
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('start-planner-tour', startPlannerTour);
     return () => window.removeEventListener('start-planner-tour', startPlannerTour);
   }, []);
