@@ -7,12 +7,10 @@ const Admin = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
-
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({ firstname: '', lastname: '', username: '' });
   const [userToDelete, setUserToDelete] = useState(null);
-
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

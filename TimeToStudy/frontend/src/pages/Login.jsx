@@ -25,7 +25,7 @@ export default function Login() {
         localStorage.setItem('accessToken', mockToken);
         localStorage.setItem('isAdmin', 'true'); // Set isAdmin to true for admin
 
-        navigate('/dashboard', { replace: true });
+        navigate('/admin', { replace: true });
         return;
       } else {
         alert('Access denied. Invalid admin credentials.');
