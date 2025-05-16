@@ -1,18 +1,23 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# Time2Study 
+This project is a fullstack web application designed to help students view their class schedules and generate personalized study planners. It combines react on the frontend, Express.js on the backend and MongoDB Atlas for data storage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Select school, year and program to load class schedules.
+- View schedule in desktop and mobile formats.
+- Generate a study planner based on selected study pace and end date.
+- Save planner in user account.
+- Admin dashboard with CRUD features
+- Authentication system for users and admins.
+- User can change password when creating a password
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-## Time2Study 
-A fullstack study planner app that helps students manage their time and schedule effectively.
+## Technical Stack
+- **Frontend** React, Vite, TailWind CSS, FullCallender
+- **Backend** Node.js, Express.js
+- **Database** MongoDB Atlas
+- **Authentication:** JSON Web Token (JWT)
+- **Other Libraries:** date-fns, ical.js, mongoose, bcrypt
 
 ## Clone or pull from the main branch
 Choose option 1 or 2 to get the project. The instructions should work for both Mac and Windows computers.
@@ -151,3 +156,16 @@ npm run dev
 
 ### Extra
 If everything is good you can now open up a browser and copy paste http://localhost:5173/ in the http search bar, then press enter. Now you will see our website, be ready to explore the beauty and the different functionalities that our website has to offer. 
+
+## React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
