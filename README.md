@@ -149,4 +149,4 @@ To get the .env files you first have to create an account in MogoDB atlas and cr
 
 
 ### Extra
-If everything is good you can now open up a browser and copy paste http://localhost:5173/ in the http search bar, then press enter. Now you will see our website, be ready to explore the beauty and the different functionalities that our wesite has to offer. 
+If everything is good you can now open up a browser and copy paste http://localhost:5173/ in the http search bar, then press enter. Now you will see our website, be ready to explore the beauty and the different functionalities that our website has to offer. 
