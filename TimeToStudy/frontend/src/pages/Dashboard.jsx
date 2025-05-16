@@ -81,58 +81,49 @@ export default function Dashboard() {
 
 
   return (
-    <>
-      <section className="dashboard-wrapper">
-        <h1>Welcome {firstname} {lastname}!</h1>
-      </section>
+    <section className="dashboard-wrapper">
+      <h1>Welcome {firstname} {lastname}!</h1>
 
-      <section className="dashboard-sections">
-        <div className="Date-table">
-          <p className="Date-text">{today}</p>
-        </div>
+      <div className="Date-table">
+        <p className="Date-text">{today}</p>
 
-        <div className="dashboard-box">
-          {studyPlanner ? (
-            <div className="study-planner-notice">
-  <h3>{studyPlanner.studyType}</h3>
-  <p>Pace: {studyPlanner.studyPace} %</p>
-  <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
-  <p>Recommended Hours: {studyPlanner.recommendedHours}</p>
-  <p>Study Events ({studyPlanner.studyEvents.length})</p>
+        {/* Only display the study planner section */}
+        {studyPlanner ? (
+          <div className="study-planner-notice">
+            <h3>{studyPlanner.studyType}</h3>
+            <p>Study Pace: {studyPlanner.studyPace} %</p>
+            <p>End Date: {new Date(studyPlanner.endDate).toLocaleDateString()}</p>
+            <p>Proposed Hours: {studyPlanner.recommendedHours}</p>
+            <p>Study Events ({studyPlanner.studyEvents.length})</p>
 
+            {/* Event count + Toggle button grouped */}
+            {/* Show study events */}
+            <div className={`study-events-list ${showEvents ? "open" : ""}`}>
+              <ul>
+                {studyPlanner.studyEvents.map((event, index) => (
+                  <li key={index}>
+                    <strong>{event.summary}</strong><br />
+                    Location: {event.location}<br />
+                    Start: {new Date(event.startDate).toLocaleDateString()} {event.startTime}<br />
+                    End: {event.endTime}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-  {/* Event count + Toggle button grouped */}
-  
-
-  {/* Show study events */}
-  <div className={`study-events-list ${showEvents ? "open" : ""}`}>
-    <ul>
-      {studyPlanner.studyEvents.map((event, index) => (
-        <li key={index}>
-          <strong>{event.summary}</strong><br />
-          Location: {event.location}<br />
-          Start: {new Date(event.startDate).toLocaleDateString()} {event.startTime}<br />
-          End: {event.endTime}
-        </li>
-      ))}
-    </ul>
-  </div>
-
-  {/* Delete button separated below */}
-    <div className="button-group">
-    <button className="toggle-btn" onClick={toggleEvents}>
-      {showEvents ? "Hide Events" : "Show Events"}
-    </button>
-    <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
-    </div>
-  </div>
-  ) : (
-  <p>No study planner data found.</p>
-  )}
-  </div>
-  </section>
-  </>
-
+            {/* Delete button & hide event btn*/}
+              
+              <div className="delete-btn-wrapper">
+                <button className="show-event-btn" onClick=     {toggleEvents}>
+                  {showEvents ? "Hide Events" : "Show Events"}
+                </button>
+                <button className="delete-btn" onClick={handleDeleteNotice}>Delete Notice</button>
+              </div>
+          </div>
+        ) : (
+          <p>No study planner data found.</p>
+        )}
+      </div>
+    </section>
   );
 }
-//testign
