@@ -98,6 +98,9 @@ npm install jsonwebtoken bcryptjs
 If there are no issues Backend is done.
 If you are having issues with installing packages check this site for more information https://packaging.python.org/en/latest/guides/
 
+### Now use your own .env files one in backend and one in frontend.
+To get the .env files you first have to create an account in MogoDB atlas and crate a cluster where you can store your databases. For more information follow their website https://www.mongodb.com/. Then in your cluster you will find a MONGO_URI that you can use in .env file and store it in backend. For the .env file in the frontend you will need to ask Frida. 
+
 ## Start the server by running Frontend and Backend togheter.
 Now you should have everything you need if you have followed the steps from "Clone or pull from the main branch" and "Setup and install"
 
@@ -144,8 +147,6 @@ npm run dev
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ```
-### Now use your own .env files one in backend and one in frontend.
-To get the .env files you first have to create an account in MogoDB atlas and crate a cluster where you can store your databases. For more information follow their website https://www.mongodb.com/. Then in your cluster you will find a MONGO_URI that you can use in .env file and store it in backend. For the .env file in the frontend you will need to ask Frida. 
 
 
 ### Extra
