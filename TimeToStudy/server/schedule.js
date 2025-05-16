@@ -111,7 +111,7 @@ mongoose.connect(DB_MONGODB)
 
   app.listen(DB_PORT, () => {
 
-    console.log(`Server running on http://localhost:${DB_PORT}..`);
+    console.log(`Server is live on port ${DB_PORT}..`);
 });
 })
 
