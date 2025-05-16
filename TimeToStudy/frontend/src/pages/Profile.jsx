@@ -11,18 +11,20 @@ export default function Profile() {
 
   const [password, setPassword] = useState('');
 
-  const [currentPassword, setCurrentPassword] = useState('');
   const[newPassword, setNewPassword] = useState('');
   const[confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+
 
   const [showPasswords, setShowPasswords] = useState(false); //Added by Frida
+
+  // const navigate = useNavigate(); Added by Frida, do we want to navigate to login after successfully changed passwords?
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
     console.log("Testing if API URL works: ", apiUrl);
 
     console.log("changePassword function called");
-    console.log("currentPassword:", currentPassword);
     console.log("newPassword:", newPassword);
     console.log("Testing if API URL works: ", apiUrl);
 
@@ -53,9 +55,7 @@ export default function Profile() {
 
   let handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'currentPassword') {
-      setCurrentPassword(value);
-    } else if (name === 'newPassword') {
+    if (name === 'newPassword') {
       setNewPassword(value);
     } else if (name === 'confirmPassword') {
       setConfirmPassword(value);
@@ -74,16 +74,6 @@ export default function Profile() {
 
     if (newPassword.length <= 8) {
       alert("New password must be at least 8 characters long and include:\n- at least one lowercase letter\n- at least one number\n- at least one special character (!@#$%^&*)\n- only letters, numbers, and these special characters are allowed");
-      return;
-    }
-
-    if (currentPassword === newPassword) {
-      alert("New password cannot be the same as the current password.");
-      return;
-    }
-
-    if (currentPassword === '') {
-      alert("Current password cannot be empty.");
       return;
     }
 
@@ -119,27 +109,17 @@ export default function Profile() {
       if (response.ok) {
         alert('Password changed successfully!');
          // empty the password fields
-         setCurrentPassword('');
          setNewPassword('');
          setConfirmPassword('');
+         setCurrentPassword('');
+         localStorage.removeItem('accessToken'); // log
+         navigate('/login'); // send to login
+
       } else {
         alert(data.message || 'Password change failed');
       }
     } catch (err) {
       console.error('Error:', err);
-    }
-  }
-
-  function showPassword() {
-    const passwordInput = document.getElementById("password");
-    const toggleButton = target;
-
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      toggleButton.textContent = "🙈"; 
-    } else {
-      passwordInput.type = "password";
-      toggleButton.textContent = "👁️";
     }
   }
 
@@ -155,15 +135,16 @@ export default function Profile() {
 
         <p><strong>Change Password:</strong></p>
         <form onSubmit={changePassword}>
+        
         <input
-          type={showPasswords ? "text" : "password"} //Added by Frida
-          placeholder="Current Password"
-          value={currentPassword}
-          onChange={handlePasswordChange}
-          name="currentPassword"
-          required
-        />  
-       
+        type={showPasswords ? "text" : "password"}
+        placeholder="Current Password"
+        value={currentPassword}
+        onChange={(e) => setCurrentPassword(e.target.value)}
+        name="currentPassword"
+        required
+        />
+     
         <input
           type={showPasswords ? "text" : "password"}
           placeholder="New Password"

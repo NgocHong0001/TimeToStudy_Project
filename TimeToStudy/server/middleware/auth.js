@@ -4,12 +4,12 @@ import User from '../models/user.js';
 
 
 export const protect = async (req, res, next) => {
-  console.log('🔥 PROTECT middleware körs');
+  console.log('🔥 PROTECT middleware runs');
   const authHeader = req.headers.authorization;
   console.log("🧾 authHeader:", authHeader);
 
   if (!authHeader?.startsWith('Bearer ')) {
-    console.log("❌ Ingen eller felaktig auth header");
+    console.log("❌ No or wrong auth header");
     return res.status(401).json({ message: 'Not authorized' });
   }
 
@@ -19,7 +19,7 @@ export const protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     console.log('🧩 Decoded token:', decoded);
 
-    const userId = decoded.userId; // 🟢 rätt nyckel
+    const userId = decoded.userId; // 🟢 right key
     console.log('Looking for user with ID:', userId);
 
     const user = await User.findById(userId).select('-password');

@@ -1,39 +1,37 @@
-import bcrypt, { hash } from "bcrypt";
-import User from "../models/user.js";
+import User from '../models/user.js';
 
-export const changePassword = async (req, res) => { 
+export const changePassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const userId = req.user._id;
 
   try {
     const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    // Compare current password
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Current password is incorrect." });
     }
 
-    const comparePassword = await bcrypt.compare(currentPassword, user.password);
-    if (!comparePassword) return res.status(404).json({ message: "Current password is wrong."});
-
-    if (currentPassword === comparePassword) {
-      return res.status(400).json({ message: "New password can't be the same as the current password."});
-    }
-
-    const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(newPassword);
-
-    if (!passwordRegex) {
+    // Validate
+    const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
       return res.status(400).json({
-        message: "Password must be at least 8 characters long and include:\n- at least one lowercase letter\n- at least one number\n- at least one special character (!@#$%^&*)\n- only letters, numbers, and these special characters are allowed"
+        message: "New password must be at least 8 characters and include one lowercase letter, one number, and one special character."
       });
     }
-    
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
+    // Save
+    user.password = newPassword;
     await user.save();
 
-    return res.status(200).json({ message: "Password changed successfully!" });
+    return res.status(200).json({
+      message: "Password changed successfully.",
+      requireReLogin: true
+    });
 
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ message: err.message });
   }
-}
+};
