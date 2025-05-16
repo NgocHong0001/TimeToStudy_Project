@@ -56,25 +56,6 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-export const changePassword = async (req, res) => { 
-  const { newPassword } = req.body;
-  const userId = req.user.id;
-
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
-    }
-
-    user.password = newPassword;
-    await user.save();
-
-    return res.status(200).json({ message: "Password changed successfully!" });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
-  }
-}
-
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();

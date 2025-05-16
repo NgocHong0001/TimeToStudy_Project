@@ -16,9 +16,9 @@ export default function RegisterForm() {
     const apiUrl = import.meta.env.VITE_API_URL;
     console.log("Testing if API URL works: ", apiUrl);
 
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
-    if (!passwordPattern.test(password)) {
-      alert("Password must be at least 6 characters long and contain at least one letter, one number, and one special character.");
+    const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert("Password must be at least 8 characters long and include:\n- at least one lowercase letter\n- at least one number\n- at least one special character (!@#$%^&*)\n- only letters, numbers, and these special characters are allowed");
       return;
     }
     try {

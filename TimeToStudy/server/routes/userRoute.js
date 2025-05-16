@@ -1,10 +1,11 @@
 import express from 'express';
-import { registerUser, getUserProfile, changePassword } from '../controllers/userController.js'; 
+import { registerUser, getUserProfile } from '../controllers/userController.js'; 
 import { protect } from '../middleware/auth.js';
 import { loginUser } from '../controllers/loginController.js'; // Import the login controller
 import { savePlanner, usersPlanner, deletePlanner } from '../controllers/plannerController.js'; // Import the planner controller
 import { refreshAccessToken } from '../controllers/tokenController.js'; // Import the refresh token controller
 import { logOutUser } from '../controllers/logOutController.js';
+import { changePassword } from '../controllers/changePasswordController.js';
 
 const router = express.Router();
 

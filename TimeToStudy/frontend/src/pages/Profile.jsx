@@ -15,6 +15,7 @@ export default function Profile() {
   const[newPassword, setNewPassword] = useState('');
   const[confirmPassword, setConfirmPassword] = useState('');
 
+  const [showPasswords, setShowPasswords] = useState(false); //Added by Frida
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
@@ -71,8 +72,8 @@ export default function Profile() {
       return;
     }
 
-    if (newPassword.length <= 6) {
-      alert("New password must be at least 6 characters long.");
+    if (newPassword.length <= 8) {
+      alert("New password must be at least 8 characters long and include:\n- at least one lowercase letter\n- at least one number\n- at least one special character (!@#$%^&*)\n- only letters, numbers, and these special characters are allowed");
       return;
     }
 
@@ -96,9 +97,9 @@ export default function Profile() {
       return;
     }
 
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
-    if (!passwordPattern.test(newPassword)) {
-      alert("Password must be at least 6 characters long and contain at least one letter, one number, and one special character.");
+    const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      alert("Password must be at least 8 characters long and include:\n- at least one lowercase letter\n- at least one number\n- at least one special character (!@#$%^&*)\n- only letters, numbers, and these special characters are allowed");
       return;
 }
 
@@ -129,6 +130,19 @@ export default function Profile() {
     }
   }
 
+  function showPassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleButton = target;
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleButton.textContent = "🙈"; 
+    } else {
+      passwordInput.type = "password";
+      toggleButton.textContent = "👁️";
+    }
+  }
+
   return (
     <div className="profile-page">
       <h2>Profile Page</h2>
@@ -139,10 +153,10 @@ export default function Profile() {
         <p><strong>Email:</strong> {email}</p>
         
 
-        <p>Change Password</p>
+        <p><strong>Change Password:</strong></p>
         <form onSubmit={changePassword}>
         <input
-          type="password"
+          type={showPasswords ? "text" : "password"} //Added by Frida
           placeholder="Current Password"
           value={currentPassword}
           onChange={handlePasswordChange}
@@ -151,7 +165,7 @@ export default function Profile() {
         />  
        
         <input
-          type="password"
+          type={showPasswords ? "text" : "password"}
           placeholder="New Password"
           value={newPassword}
           onChange={handlePasswordChange}
@@ -159,13 +173,16 @@ export default function Profile() {
           required
         /> 
         <input
-          type="password"
+          type={showPasswords ? "text" : "password"}
           placeholder="Re-enter New Password"
           value={confirmPassword}
           onChange={handlePasswordChange}
           name="confirmPassword"
           required
         /> 
+        <button type="button" onClick={() => setShowPasswords(!showPasswords)}>
+          {showPasswords ? "🙈" : "👁️"} </button>
+
         <button type="submit">Change Password</button>
         </form>
 
