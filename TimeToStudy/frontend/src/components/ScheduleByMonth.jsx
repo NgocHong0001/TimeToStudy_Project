@@ -3,14 +3,11 @@ import React, { useState } from 'react';
 // Dropdown options
 const schools = [
   { value: 'hkr', label: 'HKR' },
-  { value: 'lnu', label: 'Malmö Universitet' },
-  { value: 'umu', label: 'LTH' },
+
 ];
 
 const programs = [
   { value: 'data', label: 'DataSystemutveckling' },
-  { value: 'sjukvard', label: 'Sjukvårdsprogrammet' },
-  { value: 'ekonom', label: 'EkonomiProgrammet' },
 ];
 
 const years = [

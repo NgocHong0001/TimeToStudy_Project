@@ -34,7 +34,6 @@ function School_sch() {
   const [recommendedHours, setRecommendedHours] = useState(null);
 
   // Get ICS data
-  // Get ICS data
   const handleGetICSData = async (file) => {
     try {
       const response = await authorizedFetch(`/api/ics?file=${file}`);
@@ -292,7 +291,6 @@ useEffect(() => {
   </button>
 )}
 
-     
       {/* Container for both StudyTextForm and FileSelector */}
       <div className="study-and-file-selector-container">
         {/* File Selector */}
@@ -307,8 +305,7 @@ useEffect(() => {
           handleGetICSData
     }}/>{/* Study Text Form */} 
     <StudyTextForm /> 
-
-
+  
 </div>
    
       {/* Week Navigation */}
