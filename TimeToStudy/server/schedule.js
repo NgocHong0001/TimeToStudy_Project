@@ -24,9 +24,14 @@ console.log("URI from env:", process.env.MONGO_URI);
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://timetostudy-project-1.onrender.com' // 👈 your deployed frontend URL
+];
+
 //cors config. allows cookies and frontend to connect.
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL?
+  origin: allowedOrigins, // Replace with your frontend URL?
   credentials: true, //allow cookies
 }));
 
