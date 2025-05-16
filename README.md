@@ -118,7 +118,7 @@ npm start
 > server@1.0.0 start
 > node schedule.js
 
-URI from env: mongodb+srv://lubechrisi:nn8wwD8DexRYbE8p@clusteroftime2study.bd8mnnm.mongodb.net/?retryWrites=true&w=majority&appName=ClusterofTime2study
+URI from env: mongodb+srv:"xxxxxxxxxxxxxxxxxxxxxxx"
 Trying to connect to MongoDB...
 MongoDB connected
 Server running on http://localhost:5000..
