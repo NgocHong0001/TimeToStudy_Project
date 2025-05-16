@@ -153,7 +153,7 @@ function School_sch() {
 
   const handleSavePlanner = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     let userId = null;
     if (token) {
       try {
@@ -197,7 +197,7 @@ function School_sch() {
 
   const handleDeletePlanner = async (plannerId, e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (!token) {
       console.error('No token found.');
       return;
@@ -225,7 +225,7 @@ function School_sch() {
 }
 
   const fetchPlanner = async () => {
-    const token = localStorage.getItem("token"); //original was accessToken but it was not working for refreshing the event update after deleting the planner.
+    const token = localStorage.getItem("accessToken"); //original was accessToken but it was not working for refreshing the event update after deleting the planner.
     if (!token) {
       console.error("No token found.");
       return;

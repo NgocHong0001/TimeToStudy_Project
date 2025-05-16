@@ -18,7 +18,7 @@ export default function Profile() {
 
   const [showPasswords, setShowPasswords] = useState(false); //Added by Frida
 
-  // const navigate = useNavigate(); Added by Frida, do we want to navigate to login after successfully changed passwords?
+  const navigate = useNavigate(); //Added by Frida, do we want to navigate to login after successfully changed passwords?
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; //This points to the backend.
@@ -112,7 +112,7 @@ export default function Profile() {
          setNewPassword('');
          setConfirmPassword('');
          setCurrentPassword('');
-         localStorage.removeItem('accessToken'); // log
+         //localStorage.removeItem('accessToken'); // log
          navigate('/login'); // send to login
 
       } else {
