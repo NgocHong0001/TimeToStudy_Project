@@ -13,7 +13,7 @@ export default function Layout() {
       <div className="layout">
         <header className="header">
         <Link to="/" className="title">
-          <img src="src/assets/logo (1).png" alt="Logo" className="logo" />
+          <img src="src/public/assets/logo (1).png" alt="Logo" className="logo" />
           <h1>Time2Study</h1>
         </Link>
         </header>
@@ -26,8 +26,8 @@ export default function Layout() {
           </div>
 
           <ul className="navbar-links">
-            <li><Link to="/"><img src="src/assets/home.png" alt="log-in"></img><span>Home</span></Link></li>
-            <li><Link to="/about"><img src="src/assets/about-us.png" alt="about us"></img><span>About Us</span></Link></li>
+            <li><Link to="/"><img src="src/public/assets/home.png" alt="log-in"></img><span>Home</span></Link></li>
+            <li><Link to="/about"><img src="src/public/assets/about-us.png" alt="about us"></img><span>About Us</span></Link></li>
           </ul>
 
           {/* slide out menu*/} 

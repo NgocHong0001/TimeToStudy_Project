@@ -13,7 +13,7 @@ export default function About() {
       <h2 className="creators-title" data-aos="fade-up" data-aos-duration="800">Meet the team</h2>
       <div className="team-cards" data-aos="fade-up" data-aos-duration="800">
         <div className="team-card">
-          <img src="src/assets/yellow-person.png" alt="Ngoc Hong" />
+          <img src="src/public/assets/yellow-person.png" alt="Ngoc Hong" />
           <h3>Ngoc Hong</h3>
           <h4> UI/UX Designer & Frontend Developer</h4>
           <p>Ngoc designed the entire visual experience of Time2Study using Figma and implemented the full UI in code. Every page layout, styling, and user interaction was crafted with a strong focus on usability and modern design.</p>
@@ -21,7 +21,7 @@ export default function About() {
           <p>📞 07-xxx-xxx-xx</p>
         </div>
         <div className="team-card">
-          <img src="src/assets/yellow-person.png" alt="Frida Johannesson" />
+          <img src="src/public/assets/yellow-person.png" alt="Frida Johannesson" />
           <h3>Frida Johannesson</h3>
           <h4>Backend Developer & Auth Specialist</h4>
           <p>Frida built the authentication system and backend logic behind user actions. She ensured secure login, session handling, and that all user data is saved correctly in the database. She also contributed to connecting backend data to the frontend login interface.</p>
@@ -29,7 +29,7 @@ export default function About() {
           <p>📞 07-xxx-xxx-xx</p>
         </div>
         <div className="team-card">
-          <img src="src/assets/yellow-person.png" alt="Chris Lubert" />
+          <img src="src/public/assets/yellow-person.png" alt="Chris Lubert" />
           <h3>Chris Lubert</h3>
           <h4>Backend Developer & Data Integration Engineer</h4>
           <p>Chris focused on the backend and developed the web scraping functionality that powers the schedule-fetching system from external sources. His work forms the core logic that enables Time2Study to pull and process academic schedules automatically.</p>

@@ -19,17 +19,17 @@ export default function Home() {
 
       <div className="hero-boxes">
         <div className="hero-box" data-aos="zoom-in" data-aos-duration="500">
-          <img src="src/assets/yellow-person.png" alt="yellow-person" />
+          <img src="src/public/assets/yellow-person.png" alt="yellow-person" />
           <p>Log in or register your account to start your journey!</p>
         </div>
 
         <div className="hero-box" data-aos="zoom-in" data-aos-duration="800">
-          <img src="src/assets/yellow-schedule.png" alt="yellow-calendar" />
+          <img src="src/public/assets/yellow-schedule.png" alt="yellow-calendar" />
           <p>Pick your school program schedule</p>
         </div>
 
         <div className="hero-box" data-aos="zoom-in" data-aos-duration="900">
-          <img src="src/assets/yellow-planner.png" alt="yellow-plan" />
+          <img src="src/public/assets/yellow-planner.png" alt="yellow-plan" />
           <p>Let the system generate your personalized study plan</p>
         </div>
 

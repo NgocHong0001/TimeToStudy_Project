@@ -12,7 +12,7 @@
   left: 0;
   width: 100%;
   height: 60vh;
-  background-image: url('/src/assets/pexels-pixabay-159866.jpg');
+  background-image: url('/src/public/assets/pexels-pixabay-159866.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; /* Ensures the image covers the entire section */
@@ -22,7 +22,7 @@
 
 .hero-paper {
   margin-top: 50vh; /* pulls up slightly to overlap the book image */
-  background: url('/src/assets/white-paper-texture.jpg') center/cover no-repeat;
+  background: url('/src/public/assets/white-paper-texture.jpg') center/cover no-repeat;
   padding: 2rem;
   max-width: 700px;
   width: 90%;
